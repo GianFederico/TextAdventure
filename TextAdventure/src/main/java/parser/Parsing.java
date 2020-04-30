@@ -1,7 +1,7 @@
 package parser;
 
 import base.Command;
-import base.Stobj;
+import ObjectSet.Stobj;
 import java.util.List;
 
 public class Parsing {

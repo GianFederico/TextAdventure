@@ -1,5 +1,5 @@
 
-package base;
+package ObjectSet;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -97,6 +97,10 @@ public class Stobj {
 
     public void setPush(boolean push) {
         this.push = push;
+    }
+    
+     public boolean isPushable() {
+        return pushable;
     }
     
      public void setPushable(boolean push) {

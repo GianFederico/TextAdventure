@@ -1,8 +1,5 @@
 package newpackage01;
 
-import base.Command;
-import java.util.List;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import newpackage01.Game.ChoiceHandler;
@@ -26,7 +23,6 @@ public class Game {
     Story story= new Story(this, ui, vm);
     String nextPosition1, nextPosition2, nextPosition3, nextPosition4;
     InventoryHandler invHandler= new InventoryHandler();
-    List<Command> listacomandi = CommandsInit();
     
     SuperItem[] playerItem = new SuperItem[12];
         Item_Pozione pozione= new Item_Pozione();
@@ -121,50 +117,6 @@ public class Game {
                     }
                 }
             }
-        
-        public List<Command> CommandsInit(){
-            List<Command> comandi = new ArrayList<>();
-            Command nord = new Command("nord");
-            nord.setAka(new String[]{"n", "N", "Nord", "NORD"});
-            comandi.add(nord);
-            Command sud = new Command("sud");
-            sud.setAka(new String[]{"s", "S", "Sud", "SUD"});
-            comandi.add(sud);
-            Command est = new Command("est");
-            est.setAka(new String[]{"e", "E", "Est", "EST"});
-            comandi.add(est);
-            Command ovest = new Command("ovest");
-            ovest.setAka(new String[]{"o", "O", "Ovest", "OVEST"});
-            comandi.add(ovest);
-            Command end = new Command("fine");
-            end.setAka(new String[]{"end", "fine", "termina", "muori", "ammazzati", "ucciditi", "suicidati", "basta"});
-            comandi.add(end);
-            Command look = new Command("osserva");
-            look.setAka(new String[]{"guarda", "vedi", "trova", "cerca", "descrivi"});
-            comandi.add(look);
-            Command pickup = new Command("raccogli");
-            pickup.setAka(new String[]{"prendi"});
-            comandi.add(pickup);
-            Command push = new Command("premi");
-            push.setAka(new String[]{"spingi","attiva","tira"});
-            comandi.add(push);
-            Command choose = new Command("scegli");
-            choose.setAka(new String[]{});
-            comandi.add(choose);
-            Command fight = new Command("attacca");
-            fight.setAka(new String[]{"combatti", "affronta"});
-            comandi.add(fight);
-            Command flee = new Command("fuggi");
-            flee.setAka(new String[]{"scappa"});
-            comandi.add(flee);
-            Command climb = new Command("scala");
-            climb.setAka(new String[]{"arrampica", "arrampicati"});
-            comandi.add(climb);
-            Command back = new Command("indietro");
-            back.setAka(new String[]{"torna"});
-            comandi.add(back);
-            return comandi;
-     }
         
         }
                 

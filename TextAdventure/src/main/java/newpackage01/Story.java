@@ -2,8 +2,8 @@ package newpackage01;
 
 import newpackage02.Weapon_Coltello;
 import newpackage02.Weapon_SpadaLunga;
-import newpackage03.Monster_Troll;
-import newpackage03.Monster_Lupo;
+import newpackage03.Monster_Goblin;
+import newpackage03.Monster_Jelly;
 import newpackage03.SuperMonster;
 
 public class Story {
@@ -229,10 +229,10 @@ public class Story {
         int i = new java.util.Random().nextInt(100)+1;
         
         if(i<10){
-           monster= new Monster_Troll(); 
+           monster= new Monster_Goblin(); 
         }
         else{
-            monster= new Monster_Lupo();
+            monster= new Monster_Jelly();
         }
         
         ui.text="Ti avvicini ad un ruscello e quando provi a rinfrescarti bagnandoti la faccia, ti attacca un "+ monster.name +" nascosto nei cespugli!"
@@ -254,7 +254,7 @@ public class Story {
     
     public void fight(){
         prepareText();   
-        ui.text=monster.getName() + ": "+monster.getHp()+ "\n\nche vuoi fare?"; 
+        ui.text=monster.name + ": "+monster.hp+ "\n\nche vuoi fare?"; 
         
        /* ui.choice1.setText("attacca");               
         ui.choice2.setText("scappa");
@@ -271,8 +271,8 @@ public class Story {
         prepareText();   
         int playerDamage= new java.util.Random().nextInt(player.currentWeapon.damage); //danno uguale ad un numero a caso tra 0 e danno dell'arma
         
-        ui.text="Hai attaccato il " +monster.getName()+ "ed hai fatto "+playerDamage+"danni!";
-        monster.setHp(monster.getHp()-playerDamage);
+        ui.text="Hai attaccato il " +monster.name+ "ed hai fatto "+playerDamage+"danni!";
+        monster.hp= (monster.hp-playerDamage);
         
        /* ui.choice1.setText(">");               
         ui.choice2.setText("scappa");

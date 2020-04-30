@@ -2,7 +2,7 @@
 package parser;
 
 import base.Command;
-import base.Stobj;
+import ObjectSet.Stobj;
 
 public class ParserOut {
     
