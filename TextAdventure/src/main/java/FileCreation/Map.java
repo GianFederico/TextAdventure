@@ -1,7 +1,7 @@
 package FileCreation;
 
-import base.Room;
-import base.Stobj;
+import RoomSet.*;
+import ObjectSet.Stobj;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -42,13 +42,15 @@ public class Map {
         
         //Piazza centrale
         Room square = new Room("piazza", "Ti trovi davanti la piazza centrale del villaggio dove sei nato e cresciuto. Quanti ricordi...\n"
-                                                         + "\n" +"Che vuoi fare)");
+                                                         + "\n" +"Che vuoi fare?");
         this.map.add(square);
         
         
         
         //Negozio dell'alchimista
-        Room alchemshop = new Room("alchimista", "Ti ritrovi nel negozio del vecchio alchimista del villaggio. Vende delle pozioni "
+        AlchemShop alchemshop = new AlchemShop();
+        alchemshop.setName("alchimista");
+        alchemshop.setDescription("Ti ritrovi nel negozio del vecchio alchimista del villaggio. Vende delle pozioni "
                                                                     + "che potrebbero tornare utili durante la tua avventura.\n" + "Ti accoglie la gentile apprendista"
                                                                     + "\n" + "Che vuoi fare?");
         this.map.add(alchemshop);
@@ -56,7 +58,9 @@ public class Map {
         
         
         //Fabbro
-        Room blksmith = new Room("fabbro", "Sei nella piccola forgia del villaggio. Hai davanti un omone pelato, peloso e muscoloso "
+        BlackSmith blksmith = new BlackSmith();
+        blksmith.setName("fabbro");
+        blksmith.setDescription("Sei nella piccola forgia del villaggio. Hai davanti un omone pelato, peloso e muscoloso "
                                                             + "che ti chiede come può esserti utile");
         obj.setName("spada lunga");
         obj.setAka(new String[]{"spada, arma"});

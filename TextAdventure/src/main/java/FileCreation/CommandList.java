@@ -34,7 +34,7 @@ public class CommandList {
         this.PresetCommands.add(look);
         
         Command pickup = new Command("raccogli");
-        pickup.setAka(new String[]{"prendi, acquista"});
+        pickup.setAka(new String[]{"prendi", "ottieni"});
         this.PresetCommands.add(pickup);
         
         Command push = new Command("premi");
@@ -60,6 +60,15 @@ public class CommandList {
         Command back = new Command("indietro");
         back.setAka(new String[]{"torna"});
         this.PresetCommands.add(back);
+        
+        Command open = new Command("apri");
+        open.setAka(new String[]{"spalanca"});
+        this.PresetCommands.add(open);
+        
+        Command buy = new Command("compra");
+        buy.setAka(new String[]{"acquista"});
+        this.PresetCommands.add(buy);
+        
     }
     
 }
