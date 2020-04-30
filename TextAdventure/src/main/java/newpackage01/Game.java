@@ -23,8 +23,6 @@ public class Game {
     Story story= new Story(this, ui, vm);
     String nextPosition1, nextPosition2, nextPosition3, nextPosition4;
     InventoryHandler invHandler= new InventoryHandler();
-
-   
     
     SuperItem[] playerItem = new SuperItem[12];
         Item_Pozione pozione= new Item_Pozione();
@@ -42,13 +40,15 @@ public class Game {
     }
     
     
+    
     public Game(){
         ui.createUI(cHandler, invHandler);  //accediamo ai metodi della classe UI = crea la finestra di dialogo
         vm.showTitleScreen();   //acceediamo ai metodi della classe VisibilityManager = mostra la schermata iniziale
-
+        story.defaultSetup();   //accediamo ai metodi della classe Story = con i paramentri di default
     }
 
 
+    
     public class ChoiceHandler implements ActionListener{ //gestore per le scelte che aspetta l'evento(cioè il click)
         @Override
         public void actionPerformed(ActionEvent event){
@@ -56,17 +56,9 @@ public class Game {
             
             switch(yourChoice){             //qui bisogna aggiungere tutti i possibili casi in cui il parser può sfociare
                case "start": 
-                    story.startOrLoad="start";
-                    story.setup();  
                     vm.titleToGame(); story.storyBegins();  //transizione dallo schermo iniziale a storyBegins, non va cancellato 
-                    break;
-                    
-               case "continue":
-                   story.startOrLoad="continue";
-                   story.setup(); 
-                   vm.titleToGame(); 
-                   break;             
-                   
+                    break; 
+                                        
                 case "c1":
                     story.selectPosition(nextPosition1);
                     break;
@@ -125,6 +117,7 @@ public class Game {
                     }
                 }
             }
+        
         }
                 
     

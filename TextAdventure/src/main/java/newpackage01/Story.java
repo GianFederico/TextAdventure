@@ -13,7 +13,6 @@ public class Story {
     Player player= new Player();
     SuperMonster monster;
     String  inventoryStatus=null;
-    String startOrLoad;
     
     int silverRing;         //oggetto, ma va implementato un inventario magari, è solo per far vedere la diversa scelta nel metodo parlaGuardia()
     
@@ -23,63 +22,31 @@ public class Story {
         vm=vManager;
     }
     
-    public void setup(){
-        if(startOrLoad.equals("start")){
-            defaultSetup();
-        }
-        
-         if(startOrLoad.equals("continue")){
-             loadSetup();
-        }
-    }
-    
-    
     public void defaultSetup(){
     //parametri iniziali prima di iniziare il gioco, o dopo che muori
-            player.hp= 10;
-            ui.hpNumberLable.setText(""+ player.hp);
-
-            player.currentWeapon= new Weapon_Coltello();
-            ui.weaponNameLabel.setText(player.currentWeapon.name);
-
-            inventoryStatus="close";
-
-            game.playerItem[0]=game.denaro;
-            game.playerItem[1]=game.empty;
-            game.playerItem[2]=game.empty;
-            game.playerItem[3]=game.empty;
-            game.playerItem[4]=game.empty;
-            game.playerItem[5]=game.empty;
-            game.playerItem[6]=game.empty;
-            game.playerItem[7]=game.empty;
-            game.playerItem[8]=game.empty;
-            game.playerItem[9]=game.empty;
-            game.playerItem[10]=game.empty;
-            game.playerItem[11]=game.empty;
-    }
-
-  
-    public  void loadSetup(){
-                    player.hp= 10;
-            ui.hpNumberLable.setText(""+ player.hp);
-
-            player.currentWeapon= new Weapon_Coltello();
-            ui.weaponNameLabel.setText(player.currentWeapon.name);
-
-            inventoryStatus="close";
-
-            game.playerItem[0]=game.denaro;
-            game.playerItem[1]=game.empty;
-            game.playerItem[2]=game.empty;
-            game.playerItem[3]=game.empty;
-            game.playerItem[4]=game.empty;
-            game.playerItem[5]=game.empty;
-            game.playerItem[6]=game.empty;
-            game.playerItem[7]=game.empty;
-            game.playerItem[8]=game.empty;
-            game.playerItem[9]=game.empty;
-            game.playerItem[10]=game.empty;
-            game.playerItem[11]=game.empty;
+        
+        
+        player.hp= 10;
+        ui.hpNumberLable.setText(""+ player.hp);
+        
+        player.currentWeapon= new Weapon_Coltello();
+        ui.weaponNameLabel.setText(player.currentWeapon.name);
+        
+        inventoryStatus="close";
+        
+        game.playerItem[0]=game.denaro;
+        game.playerItem[1]=game.empty;
+        game.playerItem[2]=game.empty;
+        game.playerItem[3]=game.empty;
+        game.playerItem[4]=game.empty;
+        game.playerItem[5]=game.empty;
+        game.playerItem[6]=game.empty;
+        game.playerItem[7]=game.empty;
+        game.playerItem[8]=game.empty;
+        game.playerItem[9]=game.empty;
+        game.playerItem[10]=game.empty;
+        game.playerItem[11]=game.empty;
+        
     }
     
     
@@ -132,7 +99,7 @@ public class Story {
     
     public void storyBegins(){
        prepareText();  
-       ui.text="Ciao blablablabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n\nChe vuoi fare?";
+       ui.text="Ciao blablablaba\n\nChe vuoi fare?";
               
         /*
         ui.choice1.setText("Parla con qualcuno");               //questi vanno tutti rimossi e lasciato solo un panel che aspetta la stringa input dell'utente
