@@ -2,6 +2,7 @@ package FileCreation;
 
 import RoomSet.*;
 import ObjectSet.Stobj;
+import ObjectSet.Weapon;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ public class Map {
     public Map(){
         List<Stobj> roomobjects = new ArrayList<>();
         Stobj obj = new Stobj();
+        Stobj knife = new Weapon();
         
         //Creazione delle stanze. Le direzioni vengono aggiunte in seguito...
         
@@ -20,14 +22,14 @@ public class Map {
                                        + "Le dai un infuso di erbe sperando che riesca a dormire.\n" 
                                        + "Tuo padre è morto anni fa. Solo tu puoi fare qualcosa per salvarla.\n" 
                                        +"\n" +"Che vuoi fare?");
-        obj.setName("coltello");
-        obj.setDescription("Un semplice coltello. Potresti usarlo come arma");
-        obj.setPickupable(true);
-        roomobjects.add(obj);
+        knife.setName("coltello");
+        knife.setDescription("Un semplice coltello. Potresti usarlo come arma");
+        knife.setPickupable(true);
+        house.addObject(knife);
         obj.setName("ciondolo");
         obj.setDescription("Il ciondolo di tua madre. Risplende alla luce con la sua pietra preziosa. "
                                             + "Pensi possa valere qualcosa e che potrebbe tornarti utile");
-        roomobjects.add(obj);
+        house.addObject(obj);
         obj.setName("porta");
         obj.setDescription("Porta di legno. Si affaccia proprio sulla piazza centrale del villaggio. Saperlo ti fa sentire importante");
         obj.setPickupable(false);
@@ -35,7 +37,7 @@ public class Map {
         house.setMoney(2);
         house.setObject(roomobjects);
         this.map.add(house);
-        roomobjects.removeAll(roomobjects);
+        
        
         
         
@@ -62,30 +64,23 @@ public class Map {
         blksmith.setName("fabbro");
         blksmith.setDescription("Sei nella piccola forgia del villaggio. Hai davanti un omone pelato, peloso e muscoloso "
                                                             + "che ti chiede come può esserti utile");
-        obj.setName("spada lunga");
-        obj.setAka(new String[]{"spada, arma"});
-        obj.setDescription("Una spada lunga. Sicuramente più utile del coltello in combattimento. Costa 2 monete");
-        obj.setOpenable(false);
-        roomobjects.add(obj);
-        obj.setName("armatura di cuoio");
-        obj.setAka(new String[]{"armatura, indumento, vestito, indumenti, vestiti"});
-        obj.setDescription("Un'armatura di cuoio. Più resistente dei vestiti che indossi. Costa 2 monete");
-        roomobjects.add(obj);
-        blksmith.setObject(roomobjects);
         this.map.add(blksmith);
-        roomobjects.removeAll(roomobjects);
 
         
         
         //Cancello nord
-        Room ngate = new Room("cancello nord", "Ti avvicini al cancello a nord del villaggio. Sai che oltre quel cancello inizia la foresta.\n"
+        Room ngate = new NorthGate();
+        ngate.setName("cancello nord");
+        ngate.setDescription("Ti avvicini al cancello a nord del villaggio. Sai che oltre quel cancello inizia la foresta.\n"
                                                      + "Ti ferma una guardia");
         this.map.add(ngate);
             
         
         
         //radura nella foresta
-        Room fclearing= new Room("radura foresta","La radura si dirama in diverse direzioni davanti a te,\n" 
+        Room fclearing= new ForestClearing();
+        fclearing.setName("radura foresta");
+        fclearing.setDescription("La radura si dirama in diverse direzioni davanti a te,\n" 
                                                            +"dove vuoi andare?");
         this.map.add(fclearing);
               
@@ -94,18 +89,26 @@ public class Map {
         Room fcliff= new Room("dirupo foresta","Il vento si fa più forte, e anche più fresco, la vegetazione si "
                                                     + "dirada e davanti a te scorgi un grosso dirupo che ti offre un panorma"
                                                     + " mozzafiato ma, non puoi continuare da qui.");
+        obj = new Stobj();
+        obj.setName("frutto");
+        obj.setDescription("Un frutto selvatico. E' piccolo ma sembra molto nutriente. Può essere mangiato ma sei sicuro di voler mangiare qualcosa raccolta trovata per terra?");
+        obj.setPickupable(false);
+        obj.setUsable(true);
+        fcliff.addObject(obj);
         this.map.add(fcliff);
         
         
         //lago ovest  [descrizione da fare]
-        Room nlake= new Room("lago foresta","");
+        Room wlake= new WestLake();
+        wlake.setName("lago foresta");
+        wlake.setDescription("");
         obj.setName("consiglio ninfa"); //usable?
         obj.setAka(new String[]{"consiglio","appunto"});
         obj.setDescription("Il consiglio che la ninfa ti ha dato.\"tira la leva destra.\"");
         obj.setPickupable(true);
         roomobjects.add(obj);
-        nlake.setObject(roomobjects);
-        this.map.add(nlake);
+        wlake.setObject(roomobjects);
+        this.map.add(wlake);
         obj.setPickupable(true);
         roomobjects.removeAll(roomobjects);
         
@@ -229,11 +232,11 @@ public class Map {
         fclearing.setNorth(sdoor);
         fclearing.setEast(fcliff);
         fclearing.setSouth(ngate);//????
-        fclearing.setWest(nlake);
+        fclearing.setWest(wlake);
 
         fcliff.setEast(fclearing);
         
-        nlake.setWest(fclearing);
+        wlake.setWest(fclearing);
         
         sdoor.setNorth(square);
         sdoor.setSouth(fclearing);

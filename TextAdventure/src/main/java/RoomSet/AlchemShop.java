@@ -17,10 +17,10 @@ public class AlchemShop extends Room{
         this.getObjects().add(potion);
     }
     
-    public boolean interaction(Player p, Stobj buy){
+    public void interaction(Player p, Stobj buy){
         boolean nl = false;
         int pot = 3;
-        boolean aq = false;
+        //boolean aq = false;
         boolean c = false;
         Stobj e = new Stobj();
         if (pot>0){
@@ -77,12 +77,12 @@ public class AlchemShop extends Room{
                 p.addToInventory(this.potion);
                 this.getObjects().remove(this.potion);
                 pot--;
-                aq = true;
+                //aq = true;
             }
         } else {
             System.out.println("Purtroppo le pozioni acquistabili sono terminate");
         }
-        return aq;
+        //return aq;
     }
     
     

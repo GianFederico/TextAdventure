@@ -1,14 +1,21 @@
 package newpackage03;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 public class SuperMonster {
-    protected String name;
-    protected String description;
-    protected int hp;
-    protected int attack;
-    protected String attackMessage;
-    protected String dodgeMessage;
-    protected int hitRate;
-    protected int dodgeRate;
+    private String name;
+    private String description;
+    private Set<String> aka;
+    private int hp;
+    private int attack;
+    private String attackMessage;
+    private String dodgeMessage;
+    private int hitRate;
+    private int dodgeRate;
+    
+    public SuperMonster(){}
 
     public String getName() {
         return name;
@@ -24,6 +31,18 @@ public class SuperMonster {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public Set<String> getAka() {
+        return aka;
+    }
+
+    public void setAka(Set<String> aka) {
+        this.aka = aka;
+    }
+    
+    public void setAka(String[] sinonimi) {
+        this.aka = new HashSet<>(Arrays.asList(sinonimi));
     }
 
     public int getHp() {

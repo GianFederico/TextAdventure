@@ -111,7 +111,7 @@ public class Stobj {
         return aka;
     }
 
-    public void setAka(Set<String> diret) {
+    public void setAka(Set<String> aka) {
         this.aka = aka;
     }
     

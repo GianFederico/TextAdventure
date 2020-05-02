@@ -588,7 +588,7 @@ public void clearing(){
 public void forestCliff(){
     prepareText();
     //forestClearing---est
-        ui.text="Proseguendo verso Est, noti che il vento si fa più forte, e anche più fresco, la vegetazione si diradai e davanti a te scorgi un grosso dirupo che ti offre un panorma"
+        ui.text="Proseguendo verso Est, noti che il vento si fa più forte, e anche più fresco, la vegetazione si dirada e davanti a te scorgi un grosso dirupo che ti offre un panorma"
                                                     + " mozzafiato ma, non puoi continuare da qui, e decidi di tornare indietro"; 
         
         //avanti---forestClearing
