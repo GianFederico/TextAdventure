@@ -2,14 +2,14 @@ package ObjectSet;
 
 public class Weapon extends Stobj{
     
-    private int attack = 0;
+    private int damage = 0;
     
-    public void setAttack(int attack){
-        this.attack = attack;
+    public void setDamage(int dmg){
+        this.damage = dmg;
     }
     
-    public int getAttack(){
-        return this.attack;
+    public int getDamage(){
+        return this.damage;
     }
     
 }

@@ -97,6 +97,11 @@ public class Map {
         fcliff.addObject(obj);
         this.map.add(fcliff);
         
+        //sentiero verso il lago
+        Room tolake = new ToLake();
+        tolake.setName("sentiero verso il lago");
+        tolake.setDescription("");
+        this.map.add(tolake);
         
         //lago ovest  [descrizione da fare]
         Room wlake= new WestLake();

@@ -21,7 +21,7 @@ public class SuperMonster {
         return name;
     }
 
-    public void setName(String name) {
+    public final void setName(String name) {
         this.name = name;
     }
 
@@ -29,7 +29,7 @@ public class SuperMonster {
         return description;
     }
 
-    public void setDescription(String description) {
+    public final void setDescription(String description) {
         this.description = description;
     }
     
@@ -37,11 +37,11 @@ public class SuperMonster {
         return aka;
     }
 
-    public void setAka(Set<String> aka) {
+    public final void setAka(Set<String> aka) {
         this.aka = aka;
     }
     
-    public void setAka(String[] sinonimi) {
+    public final void setAka(String[] sinonimi) {
         this.aka = new HashSet<>(Arrays.asList(sinonimi));
     }
 
@@ -49,7 +49,7 @@ public class SuperMonster {
         return hp;
     }
 
-    public void setHp(int hp) {
+    public final void setHp(int hp) {
         this.hp = hp;
     }
 
@@ -57,7 +57,7 @@ public class SuperMonster {
         return attack;
     }
 
-    public void setAttack(int attack) {
+    public final void setAttack(int attack) {
         this.attack = attack;
     }
 
@@ -65,7 +65,7 @@ public class SuperMonster {
         return attackMessage;
     }
 
-    public void setAttackMessage(String attackMessage) {
+    public final void setAttackMessage(String attackMessage) {
         this.attackMessage = attackMessage;
     }
 
@@ -73,7 +73,7 @@ public class SuperMonster {
         return dodgeMessage;
     }
 
-    public void setDodgeMessage(String dodgeMessage) {
+    public final void setDodgeMessage(String dodgeMessage) {
         this.dodgeMessage = dodgeMessage;
     }
 
@@ -81,7 +81,7 @@ public class SuperMonster {
         return hitRate;
     }
 
-    public void setHitRate(int hitRate) {
+    public final void setHitRate(int hitRate) {
         this.hitRate = hitRate;
     }
 
@@ -89,7 +89,7 @@ public class SuperMonster {
         return dodgeRate;
     }
 
-    public void setDodgeRate(int dodgeRate) {
+    public final void setDodgeRate(int dodgeRate) {
         this.dodgeRate = dodgeRate;
     }
     
