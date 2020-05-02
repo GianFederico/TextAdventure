@@ -3,6 +3,7 @@ package RoomSet;
 import ObjectSet.Stobj;
 import java.util.ArrayList;
 import java.util.List;
+import newpackage03.SuperMonster;
 
 public class Room {
 
@@ -25,6 +26,8 @@ public class Room {
     private int money = 0;
     
     private List<Stobj> objects = new ArrayList<>();
+    
+    private SuperMonster monster = new SuperMonster();
         
     public Room() {}
 
@@ -113,12 +116,24 @@ public class Room {
         this.objects = objects;
     }
     
+    public void addObject(Stobj object){
+        this.objects.add(object);
+    }
+    
     public void setMoney(int money){
         this.money=money;
     }
     
     public int getMoney(){
         return money;
+    }
+    
+    public void setMonster(SuperMonster monster){
+        this.monster = monster;
+    }
+    
+    public SuperMonster getMonster(){
+        return this.monster;
     }
 
     /*@Override

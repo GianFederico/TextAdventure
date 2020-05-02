@@ -1,14 +1,16 @@
 package newpackage03;
 
 public class Monster_Lupo extends SuperMonster{
+    
    public Monster_Lupo(){
-        name="Lupo";
-        description="un lupo solitario, probabilmente in cerca di cibo, e tu sei meglio di niente.";
-        hp=25;
-        attack=5;
-        attackMessage="ti azzanna con i suoi canini affilati!";
-        dodgeMessage="schiva con destrezza!";
-        hitRate=80;
-        dodgeRate=35;
+        this.setName("lupo");
+        this.setDescription("un lupo solitario, probabilmente in cerca di cibo....e tu sembri essere meglio di niente.");
+        this.setHp(25);
+        this.setAttack(5);
+        this.setAttackMessage("ti azzanna con i suoi canini affilati!");
+        this.setDodgeMessage("schiva con destrezza!");
+        this.setHitRate(80);
+        this.setDodgeRate(35);
+        this.setAka(new String[]{"mostro", "animale"});
     }
 }
