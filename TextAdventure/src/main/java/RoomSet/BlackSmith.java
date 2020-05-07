@@ -14,17 +14,19 @@ public class BlackSmith extends Room{
         this.lsword.setPickupable(true);
         this.lsword.setUsable(true);
         this.lsword.setAka(new String[]{"spada, arma"});
+        //TODO damage di lsword
         this.armor.setName("armatura di cuoio");
         this.armor.setDescription("Una armatura di cuoio realizzata dal fabbro del villaggio. Servirà per difenderti dai nemici sul tuo cammino. Costa 2 monete");
         this.armor.setPickupable(true);
         this.armor.setUsable(true);
         this.armor.setAka(new String[]{"armatura, indumento, vestito, indumenti, vestiti"});
-        this.getObjects().add(this.lsword);
-        this.getObjects().add(this.armor);
+        //TODO defense di armor
+        this.addObject(this.lsword);
+        this.addObject(this.armor);
     }
     
-    
-    public void interaction(Player p, Stobj buy){
+    @Override
+    public void buy(Player p, Stobj buy){
         //boolean aq = false;
         
         if (this.getObjects().contains(buy)){
