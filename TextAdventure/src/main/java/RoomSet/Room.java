@@ -3,32 +3,25 @@ package RoomSet;
 import ObjectSet.Stobj;
 import java.util.ArrayList;
 import java.util.List;
+import newpackage01.Player;
 import newpackage03.SuperMonster;
 
 public class Room {
 
     //private int id;
-
     private String name;
-
     private String description;
-
-    //private boolean visible = true;
-
     private Room south = null;
-
     private Room north = null;
-
     private Room east = null;
-
     private Room west = null;
-    
     private int money = 0;
-    
     private List<Stobj> objects = new ArrayList<>();
-    
     private SuperMonster monster = new SuperMonster();
-        
+    private Room nextNorth = null;
+    private Room nextEast = null; 
+    private Room nextWest = null;
+           
     public Room() {}
 
     /*public Room(int id) {
@@ -154,6 +147,35 @@ public class Room {
         return true;
     }*/
     
+    public void buy(Player p, Stobj buy){
+        System.out.println("Non c'è nulla da comprare");
+    }
     
-
+    public void setNextNorth(Room nextNorth){
+        this.nextNorth = nextNorth;
+    }
+    
+    public Room getNextNorth(){
+        return this.nextNorth;
+    }
+    
+    public void setNextWest(Room nextWest){
+        this.nextWest = nextWest;
+    }
+    
+    public Room getNextWest(){
+        return this.nextWest;
+    }
+    
+    public void setNextEast(Room nextEast){
+        this.nextEast = nextEast;
+    }
+    
+    public Room getNextEast(){
+        return this.nextEast;
+    }
+    
+    //DA RICORDARE: Se c'è un mostro nella stanza, non ci si può guardare intorno->Si restituisce un messaggio con scritto che il mostro blocca la visuale
+    //Significa che Visible degli oggetti serve solo per il muro con l'enigma, la trappola/botola e la gemma della viverna
+    
 }

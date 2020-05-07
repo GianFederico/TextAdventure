@@ -12,12 +12,13 @@ public class AlchemShop extends Room{
     public AlchemShop(){
         this.potion.setPickupable(true);
         this.potion.setUsable(true);
-        this.getObjects().add(potion);
-        this.getObjects().add(potion);
-        this.getObjects().add(potion);
+        this.addObject(potion);
+        this.addObject(potion);
+        this.addObject(potion);
     }
     
-    public void interaction(Player p, Stobj buy){
+    @Override
+    public void buy(Player p, Stobj buy){
         boolean nl = false;
         int pot = 3;
         //boolean aq = false;

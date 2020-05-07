@@ -49,9 +49,9 @@ public class CommandList {
         fight.setAka(new String[]{"combatti", "affronta"});
         this.PresetCommands.add(fight);
         
-        Command flee = new Command("fuggi");
+        /*Command flee = new Command("fuggi");
         flee.setAka(new String[]{"scappa"});
-        this.PresetCommands.add(flee);
+        this.PresetCommands.add(flee);*/
         
         Command climb = new Command("scala");
         climb.setAka(new String[]{"arrampica", "arrampicati"});

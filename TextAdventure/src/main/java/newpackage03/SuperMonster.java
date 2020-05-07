@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SuperMonster {
+public class SuperMonster {  //TODO renderla un'interfaccia
     private String name;
     private String description;
     private Set<String> aka;
@@ -96,13 +96,13 @@ public class SuperMonster {
 }
 
 
-/*
-while player.hp>0{
+/*public void fightMonster(Player p, SuperMonster monster){
+while player.hp>0 || monster.hp>0{
     attacca sempre prima il mostro
     con possibilità di colpire = monster.hitRate%
         if(random(1,100) <= hitrate){
                 print attackMessage
-                palyer.hp-random(1,monster.attack)
+                player.hp=player.hp-random(1,monster.attack)
         }
         else{
                 print "hai schivato il colpo"
@@ -117,9 +117,12 @@ while player.hp>0{
         else{
                 print monster.dodgeMessage
                 }
-          
+}       
           if (monster.hp<0){
             print mostro sconfitto
             }
+        if input="scappa"{
+            player.setCurrentRoom(player.getPreviousRoom);
+        }
 }
 */
