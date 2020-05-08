@@ -4,11 +4,10 @@ import RoomSet.*;
 import ObjectSet.Stobj;
 import ObjectSet.Weapon;
 import ObjectSet.Door;
-import java.util.List;
-import java.util.ArrayList;
+
 
 public class Map {
-    private Room house = new House();
+    public Room house = new House(); //va messo private
     private Room square = new Room("piazza", "Ti trovi davanti la piazza centrale del villaggio dove sei nato e cresciuto. Quanti ricordi...\n"
                                                           + "\n" +"Che vuoi fare?");
     private Room alchemshop = new AlchemShop();
