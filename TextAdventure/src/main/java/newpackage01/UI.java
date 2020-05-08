@@ -27,12 +27,12 @@ public class UI {
     JFrame window;                                                                                                                                                                                                                                                                   //FINESTRA GENERALE
     JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, inventoryPanel;                                                                                               //pannelli vari all'interno della finestra
     JLabel titleNameLabel, hpLabel, hpNumberLable, weaponLabel, weaponNameLabel, inv1, inv2, inv3, inv4, inv5, inv6, inv7, inv8, inv9, inv10, inv11, inv12;                 //parti dei pannelli
-    JButton startButton, submit, inventoryButton;                                                                                                                                                                                                                 //pulsanti
+    JButton startButton, submit, inventoryButton, startButton1, saveButton, continueButton;                                                                                                                                                                                                                //pulsanti
     JTextField campo;
     JTextArea mainTextArea;                                                                                                                                                                                                                                                       //area del testo in game
-    Font titleFont= new Font("Times New Roman", Font.PLAIN, 80);
-    Font normalFont= new Font("Times New Roman", Font.PLAIN, 20);
-    Font invFont=new Font("Times New Roman", Font.PLAIN, 15);
+    Font titleFont= new Font("Times New Roman", Font.PLAIN, 85);
+    Font normalFont= new Font("Times New Roman", Font.PLAIN, 18);
+    Font invFont=new Font("Times New Roman", Font.PLAIN, 14);
     Timer timer;
         String text; //serve in timer 
         int i=0;//serve in timer
@@ -42,14 +42,14 @@ public class UI {
         
         //window
         window= new JFrame();
-        window.setSize(920,600);
+        window.setSize(900,600);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
         
         //title screen
         titleNamePanel = new JPanel();
-        titleNamePanel.setBounds(100,100,600,500);
+        titleNamePanel.setBounds(130,100,600,300);
         titleNamePanel.setBackground(Color.black);
         titleNameLabel = new JLabel("AVVENTURA");
         titleNameLabel.setForeground(Color.white);
@@ -57,8 +57,9 @@ public class UI {
         titleNamePanel.add(titleNameLabel);
         
         startButtonPanel= new JPanel();
-        startButtonPanel.setBounds(300,400,200,100);
+        startButtonPanel.setBounds(330,400,200,100);
         startButtonPanel.setBackground(Color.black);
+        startButtonPanel.setLayout(new GridLayout(3,2));
         startButton = new JButton("START");
         startButton.setBackground(Color.black);
         startButton.setForeground(Color.white);
@@ -66,19 +67,46 @@ public class UI {
         startButton.setFocusPainted(false);
         startButton.addActionListener(cHandler);
         startButton.setActionCommand("start");
+        startButton.setBorder(null);
         startButtonPanel.add(startButton);
+        
+        continueButton = new JButton("CONTINUA");
+        continueButton.setVisible(true);
+        continueButton.setBackground(Color.black);
+        continueButton.setForeground(Color.white);
+        continueButton.setFont(normalFont);
+        continueButton.setFocusPainted(false);
+        continueButton.addActionListener(cHandler);
+        continueButton.setActionCommand("continua");
+        continueButton.setBorder(null);
+        startButtonPanel.add(continueButton);
+
+        startButton1 = new JButton("Avanti");
+        startButton1.setBackground(Color.black);
+        startButton1.setForeground(Color.white);
+        startButton1.setFont(normalFont);
+        startButton1.setFocusPainted(false);
+        startButton1.addActionListener(cHandler);
+        startButton1.setActionCommand("start1");
+        startButtonPanel.add(startButton1);
         
         window.add(titleNamePanel);
         window.add(startButtonPanel);
         
         //GAME SCREEN
+        inventoryPanel=new JPanel();
+        inventoryPanel.setBounds(620, 65, 180, 300);
+        inventoryPanel.setBackground(Color.black);
+        inventoryPanel.setLayout(new GridLayout(10,1));
+        window.add(inventoryPanel);
+        
         mainTextPanel = new JPanel();
         mainTextPanel.setBounds(50,100,650,300);
         mainTextPanel.setBackground(Color.black);
         window.add(mainTextPanel);
-        
+
         mainTextArea= new JTextArea("");
-        mainTextArea.setBounds(50,50,650,300);
+        mainTextArea.setBounds(50,50,650,350);
         mainTextArea.setBackground(Color.black);
         mainTextArea.setForeground(Color.white);
         mainTextArea.setFont(normalFont);
@@ -107,17 +135,10 @@ public class UI {
                         });
         
         choiceButtonPanel = new JPanel();
-        choiceButtonPanel.setBounds(200,350,400,100);
+        choiceButtonPanel.setBounds(230,400,400,100);
         choiceButtonPanel.setBackground(Color.black);
         choiceButtonPanel.setLayout(new GridLayout(2,1));
         window.add(choiceButtonPanel);
-
-        inventoryPanel=new JPanel();
-        inventoryPanel.setBounds(720, 65, 180, 230);
-        inventoryPanel.setBackground(Color.black);
-        inventoryPanel.setLayout(new GridLayout(10,1));
-        window.add(inventoryPanel);
-        
         
         javax.swing.border.Border border = BorderFactory.createLineBorder(Color.white);  //non so perchè me l'abbia fatto fare così, era l'unico modo per metterci i bordi
         inv1=new JLabel();
@@ -264,7 +285,7 @@ public class UI {
         weaponNameLabel.setFont(normalFont);
         playerPanel.add(weaponNameLabel); 
         
-        inventoryButton = new JButton("Inventario");
+        inventoryButton = new JButton("Zaino");
         inventoryButton.setBackground(Color.black);
         inventoryButton.setForeground(Color.white);
         inventoryButton.setFont(normalFont);
@@ -272,7 +293,33 @@ public class UI {
         inventoryButton.addActionListener(invHandler);
         inventoryButton.setActionCommand("inventoryButton");
         playerPanel.add(inventoryButton);
+        
+        saveButton = new JButton("Salva");
+        saveButton.setBackground(Color.black);
+        saveButton.setForeground(Color.white);
+        saveButton.setFont(normalFont);
+        saveButton.setFocusPainted(false);
+        saveButton.addActionListener(cHandler);
+        saveButton.setActionCommand("salva");
+        playerPanel.add(saveButton);
+        
 
         window.setVisible(true);
     }
+      
+        public void prepareText(){
+        i=0;                                               //setta i=0 per il timer
+        mainTextArea.setText("");       //cancella il testo precedente
+        timer.start();                              //fa partire il timer
+    }
+
+       public void inputDescription1(){
+       prepareText();  
+       text="In questo gioco impersonerai un giovanissimo avventuriero, in un ambiente fantasy, che si ritrova a dover lottare contro la malattia di sua madre, "
+                                                        + "alla quale, neanche i chierici del villaggio in cui vivi, hanno saputo dare risposta...\n\n"
+               + "L'unica maniera per salvarla, è cercare l'ex sciamano del villaggio, esiliato dagli altri abitanti perchè ritenuto pericoloso, che vive ormai da molti anni "
+                                                        + "in solitudine sulla montagna a Nord, oltre la foresta...\n\n"
+               + "DESCRIZIONE COMANDI";
+    }
 }
+

@@ -23,22 +23,35 @@ public class VisibilityManager {
         ui.choiceButtonPanel.setVisible(false);
         ui.playerPanel.setVisible(false);
         ui.inventoryPanel.setVisible(false);
+        ui.startButton1.setVisible(false);
     }
     
     public void openInventory(){
-    
+        //mostra schermata dell'inventario 
         ui.inventoryPanel.setVisible(true);
-       //mostra schermata dell'inventario 
-
     }
     
     public void closeInventory(){
        //chiude schermata dell'inventario 
         ui.inventoryPanel.setVisible(false);
-
     }
     
-    public void titleToGame(){
+    public void titleToInput(){
+        //mostra schermata di gioco
+        ui.mainTextPanel.setVisible(true);
+        ui.startButtonPanel.setVisible(true);
+        ui.startButton1.setVisible(true);
+        
+        //nasconde schermata del titolo e inventario
+        ui.titleNamePanel.setVisible(false);
+        ui.inventoryPanel.setVisible(false);
+        ui.choiceButtonPanel.setVisible(false);
+        ui.playerPanel.setVisible(false);
+        ui.startButton.setVisible(false);
+        ui.continueButton.setVisible(false);
+    }
+    
+     public void titleToGame(){
         //nasconde schermata del titolo e inventario
         ui.titleNamePanel.setVisible(false);
         ui.startButtonPanel.setVisible(false);
