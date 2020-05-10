@@ -11,12 +11,12 @@ public class Stobj {
     private String description;
     private Set<String> aka;
     private boolean visible = true;
-    private boolean openable = false;
+    //private boolean openable = false;
     private boolean pickupable = false;
     private boolean usable = false;
-    private boolean open = false;
-    private boolean push = false;
-    private boolean pushable=false;
+    //private boolean open = false;
+    //private boolean push = false;
+    //private boolean pushable=false;
     
     public Stobj(){}
     
@@ -59,13 +59,13 @@ public class Stobj {
         this.visible = visible;
     }
     
-    public boolean isOpenable() {
+    /*public boolean isOpenable() {
         return openable;
     }
 
     public void setOpenable(boolean openable) {
         this.openable = openable;
-    }
+    }*/
 
     public boolean isPickupable() {
         return pickupable;
@@ -83,15 +83,15 @@ public class Stobj {
         this.usable = usable;
     }
 
-    public boolean isOpen() {
+    /*public boolean isOpen() {
         return open;
     }
 
     public void setOpen(boolean open) {
         this.open = open;
-    }
+    }*/
 
-    public boolean isPush() {
+    /*public boolean isPush() {
         return push;
     }
 
@@ -105,7 +105,7 @@ public class Stobj {
     
      public void setPushable(boolean push) {
         this.pushable = pushable;
-    }
+    }*/
     
     public Set<String> getAka() {
         return aka;
