@@ -9,7 +9,6 @@ import newpackage03.Monster_Troll;
 public class ToLake extends Room{
     
     private SuperMonster troll = new Monster_Troll();
-    private Room nextWest = new Room();
     
     public ToLake(){
         this.setMonster(troll);
@@ -20,10 +19,5 @@ public class ToLake extends Room{
         //fightMonster(p, this.troll)
         Stobj deadtroll = new Stobj("carcassa del troll", "Il trollo che hai sconfitto. E' stata una dura battaglia");
         this.addObject(deadtroll);
-        this.setWest(nextWest);
-    }
-    
-    public void setNextWest(Room nextWest){
-        this.nextWest = nextWest;
     }
 }

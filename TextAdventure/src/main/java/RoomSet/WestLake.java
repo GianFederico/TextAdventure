@@ -6,7 +6,7 @@ import newpackage01.Player;
 
 public class WestLake extends Room{
     
-    private boolean nyn = true;
+   private boolean nyn = true;
     
    public WestLake(){}
    

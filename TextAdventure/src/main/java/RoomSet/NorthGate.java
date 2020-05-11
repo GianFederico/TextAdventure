@@ -17,6 +17,8 @@ public class NorthGate extends Room{
         }
         if (a && !open){
             System.out.println("La guardia ti consente di procedere e ti augura buona fortuna. Il cancello viene aperto");
+            open = true;
+            this.setNorth(this.getNextNorth());
         } else if (!a && !open){
             System.out.println("La guardia ti ferma e ti dice che per addentrarti nella foresta hai bisogno di un'arma per difenderti."
                     + " Ti consiglia di andare dal fabbro del villaggio o almeno cercare qualcosa da usare a casa tua");

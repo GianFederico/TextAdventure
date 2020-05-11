@@ -11,6 +11,13 @@ public class WyvernLair extends Room{
     
     public WyvernLair(){
         this.setMonster(wyvern);
+        Stobj obj = new Stobj();
+        obj.setName("Gemma viverna");
+        obj.setAka(new String[]{"gemma","pietra"});
+        obj.setDescription("Gemma rimossa dal cranio della viverna");
+        obj.setPickupable(true);
+        obj.setVisible(false);
+        this.addObject(obj);
     }
     
     public void fightSequence(Player p){

@@ -10,7 +10,7 @@ public class BlackSmith extends Room{
 
     public BlackSmith(){
         this.lsword.setName("spada lunga");
-        this.setDescription("Una spada lunga forgiata dal fabbro del villaggio. Servirà per affrontare i nemici sul tuo cammino. Costa 2 monete");
+        this.lsword.setDescription("Una spada lunga forgiata dal fabbro del villaggio. Servirà per affrontare i nemici sul tuo cammino. Costa 2 monete");
         this.lsword.setPickupable(true);
         this.lsword.setUsable(true);
         this.lsword.setAka(new String[]{"spada, arma"});
