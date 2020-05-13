@@ -1,5 +1,6 @@
 package RoomSet;
 
+import ObjectSet.Door;
 import ObjectSet.Stobj;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -21,17 +22,17 @@ public class AlchemShop extends Room{
     public void buy(Player p, Stobj buy){
         boolean nl = false;
         int pot = 3;
+        int k = 0;
         //boolean aq = false;
         boolean c = false;
         Stobj e = new Stobj();
-        if (pot>0){
-            if (p.getMoney()<5){
-                //Controllo se il ciondolo è nell'inventario
-                for (Iterator<Stobj> it = p.getInventory().iterator(); it.hasNext();) { /////////////////////////
-                    e = it.next();                                                      ///////////////////////////
-                    if (e.getName().equals("ciondolo")){
-                        nl = true;        
-                        break;
+        if (pot > 0){
+            if (p.getMoney() < 5){
+                //Controllo se il ciondolo è nell'inventario e ne salvo la posizione
+                for (int i = 0; i < p.getInventory().size(); i++) {
+                    if (p.getInventory().get(i).getName().equals("ciondolo")) {
+                        k = i;
+                        nl = true;
                     }
                 }
                 if (nl){
@@ -53,7 +54,7 @@ public class AlchemShop extends Room{
                                     p.addToInventory(this.potion);
                                     this.getObjects().remove(this.potion);
                                     this.getObjects().remove(this.potion);
-                                    p.removeFromInventory(e);
+                                    p.getInventory().remove(p.getInventory().get(k));
                                     pot--;
                                     pot--;
                                     c = true;

@@ -24,6 +24,9 @@ public class Map {
     private Room storage=new RoomWDoor();
     private Room shamanroom=new ShamanRoom();
     private Room closet=new ShamSecretRoom();
+
+    private Room currentRoom = new Room();
+    private Room previousRoom = new Room();
      
     public Map(){
         Stobj obj = new Stobj();
@@ -175,5 +178,21 @@ public class Map {
                                                     + "che vanno da quelle d'amore a quelle velenose, ma i tuoi occhi si posano su una in particolare...");
         closet.setSouth(shamanroom);
         closet.setNextNorth(house);
+    }
+
+    public void setCurrentRoom(Room r){
+        this.currentRoom = r;
+    }
+
+    public Room getCurrentRoom(){
+        return this.currentRoom;
+    }
+
+    public void setPreviousRoom(Room r){
+        this.previousRoom = r;
+    }
+
+    public Room getPreviousRoom(){
+        return this.previousRoom;
     }
 }
