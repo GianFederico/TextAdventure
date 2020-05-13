@@ -53,9 +53,9 @@ public class CommandList {
         flee.setAka(new String[]{"scappa"});
         this.PresetCommands.add(flee);*/
         
-        Command climb = new Command("scala");
+        /*Command climb = new Command("scala");
         climb.setAka(new String[]{"arrampica", "arrampicati"});
-        this.PresetCommands.add(climb);
+        this.PresetCommands.add(climb);*/
         
         Command back = new Command("indietro");
         back.setAka(new String[]{"torna"});

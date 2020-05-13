@@ -13,11 +13,16 @@ public class ForestClearing extends Room{
     public ForestClearing(){
         this.setMonster(wolf);
     }
-    
+
+    @Override
     public void fightSequence(Player p){
-        //fightMonster(p, this.wolf);
-        Stobj deadwolf = new Stobj("carcassa del lupo", "Il cadavere del lupo che hai sconfitto. La tua prima vittoria");
-        this.addObject(deadwolf);
+        boolean dead = false;
+        dead = wolf.fightMonster(p, this.wolf);
+        if (dead){
+            this.setMonster(null);
+            Stobj deadwolf = new Stobj("carcassa del lupo", "Il cadavere del lupo che hai sconfitto. La tua prima vittoria");
+            this.addObject(deadwolf);
+        }
     }
 }
  
