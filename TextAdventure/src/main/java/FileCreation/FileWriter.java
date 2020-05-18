@@ -10,5 +10,5 @@ package FileCreation;
  * @author gianl
  */
 public class FileWriter {
-    
+
 }
