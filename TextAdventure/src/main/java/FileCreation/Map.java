@@ -3,9 +3,10 @@ package FileCreation;
 import RoomSet.*;
 import ObjectSet.Stobj;
 import ObjectSet.Door;
+import java.io.Serializable;
 
 
-public class Map {
+public class Map implements Serializable{
     private Room house = new House();
     private Room square = new RoomWDoor();
     private Room alchemshop = new AlchemShop();
