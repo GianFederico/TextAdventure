@@ -41,9 +41,9 @@ public class CommandList {
         push.setAka(new String[]{"spingi","attiva","tira"});
         this.PresetCommands.add(push);
         
-        Command choose = new Command("scegli");
+        /*Command choose = new Command("scegli");
         choose.setAka(new String[]{});
-        this.PresetCommands.add(choose);
+        this.PresetCommands.add(choose);*/
         
         Command fight = new Command("attacca");
         fight.setAka(new String[]{"combatti", "affronta"});
@@ -64,11 +64,38 @@ public class CommandList {
         Command open = new Command("apri");
         open.setAka(new String[]{"spalanca"});
         this.PresetCommands.add(open);
+
+        Command close = new Command("chiudi");
+        open.setAka(new String[]{"richiudi", "serra"});
+        this.PresetCommands.add(close);
         
         Command buy = new Command("compra");
         buy.setAka(new String[]{"acquista"});
         this.PresetCommands.add(buy);
-        
+
+        Command talk = new Command("parla");
+        //open.setAka(new String[]{""}); //TODO
+        this.PresetCommands.add(talk);
+
+        Command eat = new Command("mangia");
+        open.setAka(new String[]{"addenta"});
+        this.PresetCommands.add(eat);
+
+        Command use = new Command("usa");
+        open.setAka(new String[]{"utilizza"});
+        this.PresetCommands.add(use);
+
+        Command drink = new Command("bevi");
+        //open.setAka(new String[]{""});
+        this.PresetCommands.add(drink);
+
+        Command read = new Command("leggi");
+        //open.setAka(new String[]{""});
+        this.PresetCommands.add(read);
+
+        Command q = new Command("Q");
+        //open.setAka(new String[]{""});
+        this.PresetCommands.add(q);
     }
     
 }

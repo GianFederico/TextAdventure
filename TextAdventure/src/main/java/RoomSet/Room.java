@@ -131,7 +131,6 @@ public class Room  implements Serializable {
         return this.monster;
     }
 
-    /*@Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -142,14 +141,9 @@ public class Room  implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Room other = (Room) obj;
-        if (this.id != other.id) {
-            return false;
-        }
         return true;
-    }*/
+    }
 
-    
     public void setNextNorth(Room nextNorth){
         this.nextNorth = nextNorth;
     }
@@ -192,6 +186,15 @@ public class Room  implements Serializable {
 
     public void fightSequence(Player p){} //System.out.println("Non c'è nulla da combattere qui...");
 
+    public void riddle(){}
+
+    public void talkTo(Player p, Stobj person){
+        System.out.println("Non c'è nessuno con cui parlare");
+    }
+
+    public void activate(Stobj lever, Player p){
+        System.out.println("Qui non c'è nulla da attivare");
+    }
 
     //DA RICORDARE: Se c'è un mostro nella stanza, non ci si può guardare intorno->Si restituisce un messaggio con scritto che il mostro blocca la visuale
     //Significa che Visible degli oggetti serve solo per il muro con l'enigma, la trappola/botola e la gemma della viverna

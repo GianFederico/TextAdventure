@@ -1,18 +1,21 @@
 package RoomSet;
 
 import ObjectSet.Door;
+import ObjectSet.Potion;
 import ObjectSet.Stobj;
 import java.util.Iterator;
 import java.util.Scanner;
 import newpackage01.Player;
 
 public class AlchemShop extends Room{
-    
-    private Stobj potion = new Stobj("pozione", "Una pozione creata dall'alchimista del villaggio. Ripristina un po' di salute. Costa 5 monete");
+
     
     public AlchemShop(){
-        this.potion.setPickupable(true);
-        this.potion.setUsable(true);
+        Stobj lady = new Stobj("commessa", "Una gentile commessa. E' l'apprendista dell'alchimista del villaggio. La sfrutta senza pagarla con la promessa di insegnarle le sue tecniche. Fin'ora non ha imparato niente...");
+        this.addObject(lady); //TODO aggiungere aka
+        Stobj potion = new Potion();
+        potion.setName("Pozione");
+        potion.setDescription("Una pozione creata dall'alchimista del villaggio. Ripristina un po' di salute. Costa 5 monete");
         this.addObject(potion);
         this.addObject(potion);
         this.addObject(potion);
@@ -49,12 +52,15 @@ public class AlchemShop extends Room{
                                 case "ok":
                                     System.out.println("Scambio accettato");
                                     p.setMoney(p.getMoney()+5);
-                                    this.potion.setDescription(this.potion.getDescription().substring(this.potion.getDescription().length()-15));
-                                    p.addToInventory(this.potion);
-                                    p.addToInventory(this.potion);
-                                    this.getObjects().remove(this.potion);
-                                    this.getObjects().remove(this.potion);
-                                    p.getInventory().remove(p.getInventory().get(k));
+                                    this.getObjects().get(2).setDescription(this.getObjects().get(2).getDescription().substring(this.getObjects().get(2).getDescription().length()-15));
+                                    this.getObjects().get(2).setUsable(true);
+                                    p.addToInventory(this.getObjects().get(2));
+                                    this.getObjects().get(1).setDescription(this.getObjects().get(1).getDescription().substring(this.getObjects().get(1).getDescription().length()-15));
+                                    this.getObjects().get(1).setUsable(true);
+                                    p.addToInventory(this.getObjects().get(1));
+                                    this.getObjects().remove(2);
+                                    this.getObjects().remove(1);
+                                    p.getInventory().remove(k);
                                     pot--;
                                     pot--;
                                     c = true;
@@ -75,9 +81,10 @@ public class AlchemShop extends Room{
             } else {
                 System.out.println("Con un sorriso, la commessa ti porge la pozione e si prende le tue monete.");
                 p.setMoney(p.getMoney()-5);
-                this.potion.setDescription(this.potion.getDescription().substring(this.potion.getDescription().length()-15));
-                p.addToInventory(this.potion);
-                this.getObjects().remove(this.potion);
+                this.getObjects().get(0).setUsable(true);
+                this.getObjects().get(0).setDescription(this.getObjects().get(0).getDescription().substring(this.getObjects().get(0).getDescription().length()-15));
+                p.addToInventory(this.getObjects().get(0));
+                this.getObjects().remove(0);
                 pot--;
                 //aq = true;
             }
@@ -87,7 +94,13 @@ public class AlchemShop extends Room{
         //return aq;
     }
     
-    
+    @Override
+    public void talkTo(Player p, Stobj person){
+        if (person.getName().equals("commessa")){
+            //TODO parla con la commessa dell'alchimista
+        }
+
+    }
     
     
 }

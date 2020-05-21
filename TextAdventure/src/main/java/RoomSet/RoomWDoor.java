@@ -112,12 +112,29 @@ public class RoomWDoor extends Room {
         for (int i = 0; i < this.getObjects().size(); i++) {
             if (this.getObjects().get(i).getName().equals("porta")) {
                 d[numd] = i;
-                dir[numd] = ((Door) this.getObjects().get(i)).getDirection();
+                dir[numd] = ((Door)this.getObjects().get(i)).getDirection();
                 numd++;
             }
         }
-        if (numd > 1) {
-            while (!ins || !s.equals("indietro")) {
+        if (numd>1){
+            while (!ins || !s.equals("indietro")){
+                System.out.println("Ci sono " + (numd+1) + " porte che si affacciano su queste direzioni:\n");
+                for (int i = 0; i < numd+1; i++){
+                    switch (dir[i]){
+                        case "s":
+                            System.out.println("Sud\n");
+                            break;
+                        case "n":
+                            System.out.println("Nord\n");
+                            break;
+                        case "w":
+                            System.out.println("Ovest\n");
+                            break;
+                        case "e":
+                            System.out.println("Est\n");
+                            break;
+                    }
+                }
                 System.out.println("Quale porta vorresti chiudere? [direzione o indietro]");
                 Scanner scanner = new Scanner(System.in);
                 if (scanner.hasNextLine()) {

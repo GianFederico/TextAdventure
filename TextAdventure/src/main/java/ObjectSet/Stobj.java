@@ -1,6 +1,8 @@
 
 package ObjectSet;
 
+
+import newpackage01.Player;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -133,5 +135,7 @@ public class Stobj implements Serializable {
         }
         return e;
     }
+
+    public void use(Player p){}
     
 }

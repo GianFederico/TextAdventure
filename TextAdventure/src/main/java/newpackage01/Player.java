@@ -8,6 +8,12 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 
+
+public class Player {
+
+    private final int tothp=40;
+    private int currenthp=40;
+  
 public class Player implements Serializable {
     
     private int hp=20;
@@ -16,13 +22,17 @@ public class Player implements Serializable {
     private List<Stobj> inventory = new ArrayList<>(Arrays.asList(null,null,null,null,null,null,null,null,null,null,null,null));
     private Room currentRoom = new Room();
     private Room previousRoom = new Room();
-    
-    public void setHp(int hp){
-        this.hp = hp;
+
+    public int getTotHp(){
+        return this.tothp;
+    }
+
+    public void setCurrentHp(int hp){
+        this.currenthp = hp;
     }
     
-    public int getHp(){
-        return this.hp;
+    public int getCurrentHp(){
+        return this.currenthp;
     }
     
     public void setWeapon(Stobj weapon){
@@ -56,6 +66,8 @@ public class Player implements Serializable {
     public void removeFromInventory(Stobj obj) {
         this.inventory.remove(obj);
     }
+
+    public void removeFromInventory(int i){this.inventory.remove(i);}
     
     public void setCurrentRoom(Room current){
         this.currentRoom = current;

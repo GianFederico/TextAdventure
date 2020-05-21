@@ -8,18 +8,18 @@ public class ParserOut {
     
     private Command command; //comando
     private Stobj object;    //oggetto interagibile
-    private Stobj invobj;    //oggetto nell'inventario
+    //private Stobj invobj;    //oggetto nell'inventario
     
     public ParserOut(Command command, Stobj object) {
         this.command = command;
         this.object = object;
     }
     
-    public ParserOut(Command command, Stobj object, Stobj invobj) {
+    /*public ParserOut(Command command, Stobj object, Stobj invobj) {
         this.command = command;
         this.object = object;
         this.invobj = invobj;
-    }
+    }*/
     
     public Command getCommand() {
         return command;
@@ -37,12 +37,12 @@ public class ParserOut {
         this.object = object;
     }
 
-    public Stobj getInvObject() {
+    /*public Stobj getInvObject() {
         return invobj;
     }
 
     public void setInvObject(Stobj invobj) {
         this.invobj = invobj;
-    }
+    }*/
     
 }
