@@ -8,6 +8,7 @@ import newpackage03.Monster_Viverna;
 public class WyvernLair extends Room{
     
     private SuperMonster wyvern = new Monster_Viverna();
+    boolean win = false;
     
     public WyvernLair(){
         this.setMonster(wyvern);
@@ -21,11 +22,15 @@ public class WyvernLair extends Room{
     }
     
     public void fightSequence(Player p){
-        int d = 0;
-        //fightMonster(p, this.hob);
-        Stobj deadwyv = new Stobj("carcassa della viverna", "Il cadavere della viverna che hai sconfitto. Ha una gemma incastonata nella fronte che attira la tua attenzione");
-        this.addObject(deadwyv);
-        this.getObjects().get(0).setVisible(true);
+        if (!this.win) {
+            this.win = this.getMonster().fightMonster(p, this.getMonster());
+            if (this.win) {
+                this.setMonster(null);
+                Stobj deadwyv = new Stobj("Carcassa della viverna", "Il cadavere della viverna che hai sconfitto. Ha una gemma incastonata nella fronte che attira la tua attenzione");
+                deadwyv.setAka(new String[]{"cadavere", "carcassa", "viverna"});
+                this.addObject(deadwyv);
+                this.getObjects().get(0).setVisible(true);
+            }
+        }
     }
-    
 }

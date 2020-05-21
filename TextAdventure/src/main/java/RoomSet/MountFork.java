@@ -10,6 +10,7 @@ import ObjectSet.Door;
 public class MountFork extends RoomWDoor{
     
     private SuperMonster hob = new Monster_Hobgoblin();
+    boolean win = false;
     
     public MountFork(){
         this.setMonster(hob);
@@ -20,7 +21,7 @@ public class MountFork extends RoomWDoor{
         obj.setDescription("Il muro ha una scritta che recita:\"Non è un'isola, ma è sempre in mezzo all'acqua\". Sembra che voglia una risposta per aprirsi");
         //obj.setPushable(true);
         this.addObject(obj);
-        door.setName("porta di legno");
+        door.setName("Porta");
         door.setDescription("Porta di legno. E' chiusa");
         ((Door)door).setOpen(false);
         ((Door)door).setDirection("e");
@@ -28,11 +29,17 @@ public class MountFork extends RoomWDoor{
     }
     
     public void fightSequence(Player p){
-        int d = 0;
-        //fightMonster(p, this.hob);
-        Stobj deadhob = new Stobj("carcassa del goblin", "Il cadavere dell'hobgoblin che hai sconfitto. Riesce ad emanare un odore peggiore di quando era in vita...per quanto possibile...");
-        this.addObject(deadhob);
+        if (!this.win) {
+            this.win = this.getMonster().fightMonster(p, this.getMonster());
+            if (this.win) {
+                this.setMonster(null);
+                Stobj deadhob = new Stobj("Carcassa del goblin", "Il cadavere dell'hobgoblin che hai sconfitto. Riesce ad emanare un odore peggiore di quando era in vita...per quanto possibile...");
+                deadhob.setAka(new String[]{"cadavere", "carcassa", "goblin", "hobgoblin"});
+                this.addObject(deadhob);
+            }
+        }
     }
+
     public void riddle(){
         //TODO apertura muro con indovinello
         this.setWest(this.getNextWest());

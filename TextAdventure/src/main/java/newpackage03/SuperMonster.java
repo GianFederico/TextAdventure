@@ -105,14 +105,14 @@ public class SuperMonster {  //TODO renderla un'interfaccia
     boolean win = false;
     Random random = new Random(); //numero casuale = random.nextInt((max - min) +1) + min
     for (Stobj inv : p.getInventory()) {
-            if (inv.getName().equals("spada lunga") || inv.getName().equals("coltello")) {
+            if (inv.getName().equals("spada") || inv.getName().equals("coltello")) {
                 pldmg = ((Weapon)inv).getDamage();
             }
             if (inv.getName().equals("armatura")) {
                 pldef = ((Armor)inv).getDefense();
             }
         }
-    while (p.getHp() > 0 || monster.getHp() > 0 || input.equals("scappa")){
+    while (p.getCurrentHp() > 0 || monster.getHp() > 0 || input.equals("scappa")){
         //ad ogni turno viene chiesto cosa si vuole fare: combattere o scappare?
         while (!input.equals("combatti") || !input.equals("attacca") || !input.equals("scappa") || !input.equals("ritirati")){    //controllo sulla parola inserita->deve essere un verbo che indichi se continuare a combattere o scappare
             //se si decide di combattere
@@ -121,24 +121,24 @@ public class SuperMonster {  //TODO renderla un'interfaccia
 
                 //attacca sempre prima il mostro
                 //con possibilità di colpire = monster.hitRate%
-                    if(random.nextInt(100 - 99 + 1)+1 <= monster.getHitRate()){
+                    if(random.nextInt(100 - 1 + 1)+1 <= monster.getHitRate()){
                             System.out.println(monster.getAttackMessage());
+                            p.setCurrentHp(p.getCurrentHp()-random.nextInt(((monster.getAttack()-pldef)-1)+1)+1); //max=monsterattack-pldef     min=1
                             //TODO se il danno che il mostro riesce a farti, si visualizza un messaggio del tipo "per fortuna è solo un graffio"
-                            p.setHp(p.getHp()-random.nextInt(((monster.getAttack()-pldef)-1)+1)+1); //max=monsterattack-pldef     min=1
                     } else {
                             System.out.println("Hai schivato il colpo");
                     }
 
                 //poi attacca il giocatore
                 //con possibilità di colpire (100-monster.dodgeRate)
-                    if(random.nextInt(100 - 99 + 1)+1 <= (100-monster.getDodgeRate())){
+                    if(random.nextInt(100 - 1 + 1)+1 <= (100-monster.getDodgeRate())){
                         System.out.println("hai colpito");
                         monster.setHp(monster.getHp()-(random.nextInt((pldmg - (pldmg-5))+1)+(pldmg-5))); //max=pldmg    min=pldmg-5
                      }
                     else{
                             System.out.println(monster.getDodgeMessage());
                     }
-                    if (monster.hp < 0){
+                    if (monster.hp <= 0){
                         System.out.println(monster.getName() + " sconfitto");
                         win = true;
                     }

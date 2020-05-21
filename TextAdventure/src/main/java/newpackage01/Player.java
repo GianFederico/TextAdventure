@@ -7,20 +7,25 @@ import RoomSet.Room;
 
 
 public class Player {
-    
-    private int hp=20;
+
+    private final int tothp=40;
+    private int currenthp=40;
     private Stobj weapon;
     private int money=0;
     private List<Stobj> inventory = new ArrayList<>();
     private Room currentRoom = new Room();
     private Room previousRoom = new Room();
-    
-    public void setHp(int hp){
-        this.hp = hp;
+
+    public int getTotHp(){
+        return this.tothp;
+    }
+
+    public void setCurrentHp(int hp){
+        this.currenthp = hp;
     }
     
-    public int getHp(){
-        return this.hp;
+    public int getCurrentHp(){
+        return this.currenthp;
     }
     
     public void setWeapon(Stobj weapon){
@@ -54,6 +59,8 @@ public class Player {
     public void removeFromInventory(Stobj obj) {
         this.inventory.remove(obj);
     }
+
+    public void removeFromInventory(int i){this.inventory.remove(i);}
     
     public void setCurrentRoom(Room current){
         this.currentRoom = current;

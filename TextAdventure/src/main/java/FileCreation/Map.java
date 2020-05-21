@@ -34,7 +34,7 @@ public class Map {
         //Creazione delle stanze e assegnazione degli oggetti interagibili
         
         //Casa
-        house.setName("casa");
+        house.setName("Casa");
         house.setDescription("È mattino, sei vicino a tua madre che, dolorante, "
                                        + "giace nel letto...non ha chiuso occhio tutta la notte. "
                                        + "Le dai un infuso di erbe sperando che riesca a dormire.\n" 
@@ -43,10 +43,10 @@ public class Map {
         house.setNextNorth(square);
       
         //Piazza centrale
-        square.setName("piazza");
+        square.setName("Piazza");
         square.setDescription("Ti trovi davanti la piazza centrale del villaggio dove sei nato e cresciuto. Quanti ricordi...\\n\"\n" +
                 "                                                          + \"\\n\" +\"Che vuoi fare?");
-        door.setName("porta di legno");
+        door.setName("Porta");
         door.setDescription("E' la porta di casa tua. E' aperta");
         ((Door)door).setOpen(true);
         ((Door)door).setDirection("s");
@@ -58,27 +58,27 @@ public class Map {
         square.setWest(alchemshop);
         
         //Negozio dell'alchimista
-        alchemshop.setName("alchimista");
+        alchemshop.setName("Alchimista");
         alchemshop.setDescription("Ti ritrovi nel negozio del vecchio alchimista del villaggio. Vende delle pozioni "
                                                                     + "che potrebbero tornare utili durante la tua avventura.\n" + "Ti accoglie la gentile apprendista"
                                                                     + "\n" + "Che vuoi fare?");
         alchemshop.setEast(square);
         
         //Fabbro
-        blksmith.setName("fabbro");
+        blksmith.setName("Fabbro");
         blksmith.setDescription("Sei nella piccola forgia del villaggio. Hai davanti un omone pelato, peloso e muscoloso "
                                                             + "che ti chiede come può esserti utile");
         blksmith.setWest(square);
         
         //Cancello nord
-        ngate.setName("cancello nord");
+        ngate.setName("Cancello nord");
         ngate.setDescription("Ti avvicini al cancello a nord del villaggio. Sai che oltre quel cancello inizia la foresta.\n"
                                                      + "Per aprirlo hai bisogno di parlare con la guardia");
         ngate.setNextNorth(fclearing);
         ngate.setSouth(square);
 
         //radura nella foresta
-        fclearing.setName("radura foresta");
+        fclearing.setName("Radura foresta");
         fclearing.setDescription("La radura si dirama in diverse direzioni davanti a te,\n" 
                                                            +"dove vuoi andare?");
         fclearing.setNorth(forestend);
@@ -88,7 +88,7 @@ public class Map {
 
         //dirupo est //TODO da rivedere
         obj = new Stobj();
-        obj.setName("frutto");
+        obj.setName("Frutto");
         obj.setDescription("Un frutto selvatico. E' piccolo ma sembra molto nutriente. Può essere mangiato ma sei sicuro di voler mangiare qualcosa raccolta trovata per terra?");
         obj.setPickupable(false);
         obj.setUsable(true);
@@ -96,13 +96,13 @@ public class Map {
         fcliff.setWest(fclearing);
         
         //sentiero verso il lago
-        tolake.setName("sentiero verso il lago");
+        tolake.setName("Sentiero verso il lago");
         tolake.setDescription("");
         tolake.setEast(fclearing);
         tolake.setWest(wlake);
         
         //lago ovest
-        wlake.setName("lago nella foresta");
+        wlake.setName("Lago nella foresta");
         wlake.setDescription(""); //TODO descrizione
         wlake.setWest(tolake);
         
@@ -111,27 +111,27 @@ public class Map {
         forestend.setSouth(fclearing);
         
         //davanti alla porta segreta sulla montagna
-        mountstart.setName("base della montagna");
+        mountstart.setName("Base della montagna");
         mountstart.setDescription("Sei su un'area poco più grande che ti ricorda un pianerottolo di qualche casa, "
                                    + "ma oltre al vento e la viva roccia, ad una prima occhiata, non noti nulla di particolare.\nChe vuoi fare?");
         mountstart.setNextNorth(fork);
         mountstart.setSouth(forestend);
         
         //bivio all'interno della montagna
-        fork.setName("bivio");
+        fork.setName("Bivio");
         fork.setDescription("La strada si dirama verso Est ed Ovest.\nDove vuoi andare?");
         fork.setNextWest(wlair);
         fork.setNextEast(storage);
         fork.setSouth(mountstart);
         
         //tana della viverna
-        wlair.setName("tana della viverna");
+        wlair.setName("Tana della viverna");
         wlair.setDescription("Sei nella tana della viverna che giace immobile a terra, non hai mai visto una viverna vera, "
                                                     + "ma dalle illustrazioni che hai visto nella tua vita, sai che non hanno gemme sul corpo");
         wlair.setEast(fork);
         
         //magazzino est dopo il bivio
-        storage.setName("magazzino");
+        storage.setName("Magazzino");
         storage.setDescription("La stanza in cui sei ha un'altra porta sulla parete nord, oltre a quella da cui sei entrato.\\n\" +\n" +
                 "                                                    \"Cosa vuoi fare?");
         obj = new Stobj();
@@ -147,13 +147,13 @@ public class Map {
         storage.addObject(obj); 
         storage.setMoney(30);
         door = new Door();
-        door.setName("porta di legno");
+        door.setName("Porta");
         door.setDescription("Una semplice porta di legno. E' chiusa");
         ((Door)door).setOpen(false);
         ((Door)door).setDirection("n");
         storage.addObject(door);
         door = new Door();
-        door.setName("porta di legno");
+        door.setName("Porta");
         door.setDescription("Una semplice porta di legno. E' aperta");
         ((Door)door).setOpen(true);
         ((Door)door).setDirection("w");
@@ -163,7 +163,7 @@ public class Map {
         storage.setNextWest(fork);
         
         //stanza sciamano
-        shamanroom.setName("stanza dello sciamano");
+        shamanroom.setName("Stanza dello Sciamano");
         shamanroom.setDescription("Sulla  parete Ovest, c'è un'immensa libreria, piena di libri e di appunti. \\n\" +\n" +
                                     "\"La parete Nord è sgombra, ma noti un piccolo incavo al centro di essa.\\n\" +\n" +
                                     "\"La parete Est invece è occupata da un'enorme scrivania alla quale, una figura siede incappucciata, di spalle.\"\n" +
@@ -173,7 +173,7 @@ public class Map {
         shamanroom.setNextSouth(storage);
         
         //stanzino nascosto dello sciamano
-        closet.setName("stanzino nascosto");
+        closet.setName("Stanzino nascosto");
         closet.setDescription("All'interno ci sono almeno una quindicina di mensole che partono dal basso, con ogni tipo di pozione meticolosamente conservate, "
                                                     + "che vanno da quelle d'amore a quelle velenose, ma i tuoi occhi si posano su una in particolare...");
         closet.setSouth(shamanroom);

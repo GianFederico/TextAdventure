@@ -1,6 +1,8 @@
 
 package ObjectSet;
 
+import newpackage01.Player;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -132,5 +134,7 @@ public class Stobj {
         }
         return e;
     }
+
+    public void use(Player p){}
     
 }

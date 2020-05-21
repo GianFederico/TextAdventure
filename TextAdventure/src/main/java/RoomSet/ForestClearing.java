@@ -9,6 +9,7 @@ import ObjectSet.Stobj;
 public class ForestClearing extends Room{
     
     private SuperMonster wolf = new Monster_Lupo();
+    private boolean win = false;
     
     public ForestClearing(){
         this.setMonster(wolf);
@@ -16,12 +17,14 @@ public class ForestClearing extends Room{
 
     @Override
     public void fightSequence(Player p){
-        boolean dead = false;
-        dead = wolf.fightMonster(p, this.wolf);
-        if (dead){
-            this.setMonster(null);
-            Stobj deadwolf = new Stobj("carcassa del lupo", "Il cadavere del lupo che hai sconfitto. La tua prima vittoria");
-            this.addObject(deadwolf);
+        if (!this.win) {
+            this.win = this.getMonster().fightMonster(p, this.getMonster());
+            if (this.win) {
+                this.setMonster(null);
+                Stobj deadwolf = new Stobj("carcassa del lupo", "Il cadavere del lupo che hai sconfitto. La tua prima vittoria");
+                deadwolf.setAka(new String[]{"cadavere", "carcassa", "lupo"});
+                this.addObject(deadwolf);
+            }
         }
     }
 }

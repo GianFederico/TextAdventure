@@ -3,7 +3,7 @@ package newpackage03;
 public class Monster_Lupo extends SuperMonster{
     
    public Monster_Lupo(){
-        this.setName("lupo");
+        this.setName("Lupo");
         this.setDescription("un lupo solitario, probabilmente in cerca di cibo....e tu sembri essere meglio di niente.");
         this.setHp(25);
         this.setAttack(5);
