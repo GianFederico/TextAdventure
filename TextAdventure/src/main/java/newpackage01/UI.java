@@ -23,21 +23,23 @@ import javax.swing.Timer;
 import newpackage01.Game.ChoiceHandler;
 import newpackage01.Game.InventoryHandler;
 
-public class UI {
+public class UI  {
     JFrame window;                                                                                                                                                                                                                                                                   //FINESTRA GENERALE
-    JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, inventoryPanel;                                                                                               //pannelli vari all'interno della finestra
+    JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, inventoryPanel, inventoryDescPanel;                                                                                               //pannelli vari all'interno della finestra
     JLabel titleNameLabel, hpLabel, hpNumberLable, weaponLabel, weaponNameLabel, inv1, inv2, inv3, inv4, inv5, inv6, inv7, inv8, inv9, inv10, inv11, inv12;                 //parti dei pannelli
-    JButton startButton, submit, inventoryButton, startButton1, saveButton, continueButton;                                                                                                                                                                                                                //pulsanti
+    JButton startButton, submit, inventoryButton, startButton1, saveButton, continueButton;                                                                                                                                     //pulsanti
     JTextField campo;
-    JTextArea mainTextArea;                                                                                                                                                                                                                                                       //area del testo in game
+    JTextArea mainTextArea,invInfoArea;                                                                                                                                                                                                                                                       //area del testo in game
     Font titleFont= new Font("Times New Roman", Font.PLAIN, 85);
     Font normalFont= new Font("Times New Roman", Font.PLAIN, 18);
     Font invFont=new Font("Times New Roman", Font.PLAIN, 14);
     Timer timer;
         String text; //serve in timer 
         int i=0;//serve in timer
+        String desc=""; //descrizione degli oggetti nell'inventario    
     
-    
+        Game game;
+
     public void createUI(ChoiceHandler cHandler, InventoryHandler invHandler){
         
         //window
@@ -99,7 +101,7 @@ public class UI {
         inventoryPanel.setBackground(Color.black);
         inventoryPanel.setLayout(new GridLayout(10,1));
         window.add(inventoryPanel);
-        
+
         mainTextPanel = new JPanel();
         mainTextPanel.setBounds(50,100,650,300);
         mainTextPanel.setBackground(Color.black);
@@ -140,6 +142,7 @@ public class UI {
         choiceButtonPanel.setLayout(new GridLayout(2,1));
         window.add(choiceButtonPanel);
         
+
         javax.swing.border.Border border = BorderFactory.createLineBorder(Color.white);  //non so perchè me l'abbia fatto fare così, era l'unico modo per metterci i bordi
         inv1=new JLabel();
         inv1.setBackground(Color.black);
@@ -212,6 +215,284 @@ public class UI {
         inv12.setForeground(Color.white);
         inv12.setFont(invFont);
         inv12.setBorder(border);
+        
+        inventoryDescPanel=new JPanel();
+        inventoryDescPanel.setBounds(548, 245, 350, 100);/////////////////////////////////
+        inventoryDescPanel.setBackground(Color.black);
+        window.add(inventoryDescPanel);
+        inventoryDescPanel.setVisible(false);
+        
+        invInfoArea=new JTextArea();
+        invInfoArea.setBackground(Color.black);
+        invInfoArea.setForeground(Color.white);
+        invInfoArea.setFont(invFont);
+        inventoryDescPanel.add(invInfoArea);
+        invInfoArea.setVisible(false);
+        
+                                    inv1.addMouseListener(new MouseAdapter(){
+                                                    @Override
+                                                    public void mouseEntered(MouseEvent e){
+                                                        if(game.player.getInventory().get(0)!= null){
+                                                            inventoryDescPanel.setVisible(true);
+                                                            invInfoArea.setVisible(true);
+                                                            desc= game.player.getInventory().get(0).getDescription() ;
+                                                            invInfoArea.setText(desc); //descrizione oggetto
+                                                        }
+                                                        else{
+                                                            desc="" ;
+                                                        }
+                                                            System.out.println("mouse sopra");
+                                                    }
+                                                    @Override
+                                                    public void mouseExited(MouseEvent e){
+                                                            invInfoArea.setVisible(false);
+                                                             System.out.println("mouse uscito");
+                                                    }
+                                                    
+                                                });
+                                    
+                                    inv2.addMouseListener(new MouseAdapter(){
+                                                    @Override
+                                                    public void mouseEntered(MouseEvent e){
+                                                         if(game.player.getInventory().get(1)!= null){
+                                                            inventoryDescPanel.setVisible(true);
+                                                            invInfoArea.setVisible(true);
+                                                            desc=game.player.getInventory().get(1).getDescription() ;
+                                                            invInfoArea.setText(desc); //descrizione oggetto
+                                                         }
+                                                          else{
+                                                            desc="" ;
+                                                        }
+                                                            System.out.println("mouse sopra");
+                                                    }
+                                                    @Override
+                                                    public void mouseExited(MouseEvent e){
+                                                            invInfoArea.setVisible(false);
+                                                             System.out.println("mouse uscito");
+                                                    }
+                                                    
+                                                });
+                                    
+                                    inv3.addMouseListener(new MouseAdapter(){
+                                                    @Override
+                                                    public void mouseEntered(MouseEvent e){
+                                                         if(game.player.getInventory().get(2)!= null){
+                                                            inventoryDescPanel.setVisible(true);
+                                                            invInfoArea.setVisible(true);
+                                                            desc=game.player.getInventory().get(2).getDescription() ;
+                                                            invInfoArea.setText(desc); //descrizione oggetto
+                                                         }
+                                                          else{
+                                                            desc="" ;
+                                                        }
+                                                            System.out.println("mouse sopra");
+                                                    }
+                                                    @Override
+                                                    public void mouseExited(MouseEvent e){
+                                                            invInfoArea.setVisible(false);
+                                                             System.out.println("mouse uscito");
+                                                    }
+                                                    
+                                                });
+                                    
+                                    inv4.addMouseListener(new MouseAdapter(){
+                                                    @Override
+                                                    public void mouseEntered(MouseEvent e){
+                                                         if(game.player.getInventory().get(3)!= null){
+                                                            inventoryDescPanel.setVisible(true);
+                                                            invInfoArea.setVisible(true);
+                                                            desc=game.player.getInventory().get(3).getDescription() ;
+                                                            invInfoArea.setText(desc); //descrizione oggetto
+                                                         }
+                                                          else{
+                                                            desc="" ;
+                                                        }
+                                                            System.out.println("mouse sopra");
+                                                    }
+                                                    @Override
+                                                    public void mouseExited(MouseEvent e){
+                                                            invInfoArea.setVisible(false);
+                                                             System.out.println("mouse uscito");
+                                                    }
+                                                    
+                                                });
+                                    
+                                    inv5.addMouseListener(new MouseAdapter(){
+                                                    @Override
+                                                    public void mouseEntered(MouseEvent e){
+                                                         if(game.player.getInventory().get(4)!= null){
+                                                            inventoryDescPanel.setVisible(true);
+                                                            invInfoArea.setVisible(true);
+                                                            desc=game.player.getInventory().get(4).getDescription() ;
+                                                            invInfoArea.setText(desc); //descrizione oggetto
+                                                         }
+                                                          else{
+                                                            desc="" ;
+                                                        }
+                                                            System.out.println("mouse sopra");
+                                                    }
+                                                    @Override
+                                                    public void mouseExited(MouseEvent e){
+                                                            invInfoArea.setVisible(false);
+                                                             System.out.println("mouse uscito");
+                                                    }
+                                                    
+                                                });
+                                    
+                                    inv6.addMouseListener(new MouseAdapter(){
+                                                    @Override
+                                                    public void mouseEntered(MouseEvent e){
+                                                         if(game.player.getInventory().get(5)!= null){
+                                                            inventoryDescPanel.setVisible(true);
+                                                            invInfoArea.setVisible(true);
+                                                            desc=game.player.getInventory().get(5).getDescription() ;
+                                                            invInfoArea.setText(desc); //descrizione oggetto
+                                                         }
+                                                          else{
+                                                            desc="" ;
+                                                        }
+                                                            System.out.println("mouse sopra");
+                                                    }
+                                                    @Override
+                                                    public void mouseExited(MouseEvent e){
+                                                            invInfoArea.setVisible(false);
+                                                             System.out.println("mouse uscito");
+                                                    }
+                                                    
+                                                });
+                                    
+                                    inv7.addMouseListener(new MouseAdapter(){
+                                                    @Override
+                                                    public void mouseEntered(MouseEvent e){
+                                                         if(game.player.getInventory().get(6)!= null){
+                                                            inventoryDescPanel.setVisible(true);
+                                                            invInfoArea.setVisible(true);
+                                                            desc=game.player.getInventory().get(6).getDescription() ;
+                                                            invInfoArea.setText(desc); //descrizione oggetto
+                                                         }
+                                                          else{
+                                                            desc="" ;
+                                                        }
+                                                            System.out.println("mouse sopra");
+                                                    }
+                                                    @Override
+                                                    public void mouseExited(MouseEvent e){
+                                                            invInfoArea.setVisible(false);
+                                                             System.out.println("mouse uscito");
+                                                    }
+                                                    
+                                                });
+                                    
+                                    inv8.addMouseListener(new MouseAdapter(){
+                                                    @Override
+                                                    public void mouseEntered(MouseEvent e){
+                                                         if(game.player.getInventory().get(7)!= null){
+                                                            inventoryDescPanel.setVisible(true);
+                                                            invInfoArea.setVisible(true);
+                                                            desc=game.player.getInventory().get(7).getDescription() ;
+                                                            invInfoArea.setText(desc); //descrizione oggetto
+                                                         }
+                                                          else{
+                                                            desc="" ;
+                                                        }
+                                                            System.out.println("mouse sopra");
+                                                    }
+                                                    @Override
+                                                    public void mouseExited(MouseEvent e){
+                                                            invInfoArea.setVisible(false);
+                                                             System.out.println("mouse uscito");
+                                                    }
+                                                    
+                                                });
+                                    
+                                    inv9.addMouseListener(new MouseAdapter(){
+                                                    @Override
+                                                    public void mouseEntered(MouseEvent e){
+                                                         if(game.player.getInventory().get(8)!= null){
+                                                            inventoryDescPanel.setVisible(true);
+                                                            invInfoArea.setVisible(true);
+                                                            desc=game.player.getInventory().get(8).getDescription() ;
+                                                            invInfoArea.setText(desc); //descrizione oggetto
+                                                         }
+                                                          else{
+                                                            desc="" ;
+                                                        }
+                                                            System.out.println("mouse sopra");
+                                                    }
+                                                    @Override
+                                                    public void mouseExited(MouseEvent e){
+                                                            invInfoArea.setVisible(false);
+                                                             System.out.println("mouse uscito");
+                                                    }
+                                                    
+                                                });
+                                    
+                                    inv10.addMouseListener(new MouseAdapter(){
+                                                    @Override
+                                                    public void mouseEntered(MouseEvent e){
+                                                         if(game.player.getInventory().get(9)!= null){
+                                                            inventoryDescPanel.setVisible(true);
+                                                            invInfoArea.setVisible(true);
+                                                            desc=game.player.getInventory().get(9).getDescription() ;
+                                                            invInfoArea.setText(desc); //descrizione oggetto
+                                                         }
+                                                          else{
+                                                            desc="" ;
+                                                        }
+                                                            System.out.println("mouse sopra");
+                                                    }
+                                                    @Override
+                                                    public void mouseExited(MouseEvent e){
+                                                            invInfoArea.setVisible(false);
+                                                             System.out.println("mouse uscito");
+                                                    }
+                                                    
+                                                });
+                                    
+                                    inv11.addMouseListener(new MouseAdapter(){
+                                                    @Override
+                                                    public void mouseEntered(MouseEvent e){
+                                                         if(game.player.getInventory().get(10)!= null){
+                                                            inventoryDescPanel.setVisible(true);
+                                                            invInfoArea.setVisible(true);
+                                                            desc=game.player.getInventory().get(10).getDescription() ;
+                                                            invInfoArea.setText(desc); //descrizione oggetto
+                                                         }
+                                                          else{
+                                                            desc="" ;
+                                                        }
+                                                            System.out.println("mouse sopra");
+                                                    }
+                                                    @Override
+                                                    public void mouseExited(MouseEvent e){
+                                                            invInfoArea.setVisible(false);
+                                                             System.out.println("mouse uscito");
+                                                    }
+                                                    
+                                                });
+                                    
+                                    inv12.addMouseListener(new MouseAdapter(){
+                                                    @Override
+                                                    public void mouseEntered(MouseEvent e){
+                                                         if(game.player.getInventory().get(11)!= null){
+                                                            inventoryDescPanel.setVisible(true);
+                                                            invInfoArea.setVisible(true);
+                                                            desc=game.player.getInventory().get(11).getDescription() ;
+                                                            invInfoArea.setText(desc); //descrizione oggetto
+                                                         }
+                                                          else{
+                                                            desc="" ;
+                                                        }
+                                                            System.out.println("mouse sopra");
+                                                    }
+                                                    @Override
+                                                    public void mouseExited(MouseEvent e){
+                                                            invInfoArea.setVisible(false);
+                                                             System.out.println("mouse uscito");
+                                                    }
+                                                    
+                                                });
+
 
         inventoryPanel.add(inv1);
         inventoryPanel.add(inv2);
@@ -225,7 +506,7 @@ public class UI {
         inventoryPanel.add(inv10);
         inventoryPanel.add(inv11);
         inventoryPanel.add(inv12);
-
+        
 
         campo= new JTextField ("");           
         campo.setBackground(Color.black);         
@@ -319,7 +600,7 @@ public class UI {
                                                         + "alla quale, neanche i chierici del villaggio in cui vivi, hanno saputo dare risposta...\n\n"
                + "L'unica maniera per salvarla, è cercare l'ex sciamano del villaggio, esiliato dagli altri abitanti perchè ritenuto pericoloso, che vive ormai da molti anni "
                                                         + "in solitudine sulla montagna a Nord, oltre la foresta...\n\n"
-               + "DESCRIZIONE COMANDI";
+               + "DESCRIZIONE COMANDI\n";
     }
 }
 

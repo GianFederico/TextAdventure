@@ -3,6 +3,9 @@ package newpackage01;
 import FileCreation.Map;
 import ObjectSet.Stobj;
 import RoomSet.Room;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import newpackage03.SuperMonster;
 import parser.ParserOut;
 
@@ -10,13 +13,11 @@ public class Story {
     Game game;
     UI ui;
     VisibilityManager vm;
-    Player player= new Player();
     SuperMonster monster;
     String  inventoryStatus=null;
     Map map= new Map();
-    
-    int silverRing;         //oggetto, ma va implementato un inventario magari, è solo per far vedere la diversa scelta nel metodo parlaGuardia()
-    
+
+   
     public Story(Game g, UI userInterface, VisibilityManager vManager){
         game=g;
         ui=userInterface;
@@ -26,17 +27,19 @@ public class Story {
     public void defaultSetup(){
     //parametri iniziali prima di iniziare il gioco, o dopo che muori
 
-        //player.setCurrentHp(20);
+
+        //game.player.setCurrentHp(10);
         ui.hpNumberLable.setText(""+ player.getCurrentHp() + "/" + player.getTotHp());
+
         
-        player.setWeapon(null);
+        game.player.setWeapon(null);
         ui.weaponNameLabel.setText("");
         
         inventoryStatus="close";
  
     }
     
-    /*
+    
     public void selectPosition(String nextPosition){           //questi saranno tutti i possibili case
         switch(nextPosition){
             case "storyBegins": storyBegins();
@@ -68,7 +71,7 @@ public class Story {
         ui.choice3.setText("Dormi per terra");
         ui.choice4.setText("Guarda il cielo");
         */
-    /*
+    
         
         game.nextPosition1 = "parlaGuardia";                    //questi sono parametri per ogni pulsante, anche questi vanno rimossi
         game.nextPosition2 = "vaiVia";                          //quandoo vengono cliccati i pulsanti, restituiscono quel valore che poi va nello switch
@@ -90,7 +93,7 @@ public class Story {
         ui.choice3.setText("");
         ui.choice4.setText("");
         */
-    /*
+    
         game.nextPosition1 = "storyBegins";               
         game.nextPosition2 = "";
         game.nextPosition3 = "";
@@ -109,7 +112,7 @@ public class Story {
         ui.choice3.setText("rimani a sud");
         ui.choice4.setText("ovest");
         */
-    /*
+    
         game.nextPosition1 = "nord";                    
         game.nextPosition2 = "est";
         game.nextPosition3 = "storyBegins";
@@ -128,7 +131,7 @@ public class Story {
         ui.choice3.setText("");
         ui.choice4.setText("");
         */
-    /*
+    
         game.nextPosition1 = "storyBegins";                    
         game.nextPosition2 = "";
         game.nextPosition3 = "";
@@ -147,7 +150,7 @@ public class Story {
         ui.choice3.setText("");
         ui.choice4.setText("");
         */
-    /*
+    
         game.nextPosition1 = "storyBegins";                    
         game.nextPosition2 = "";
         game.nextPosition3 = "";
@@ -168,7 +171,7 @@ public class Story {
         ui.mainTextArea.setText("");       //cancella il testo precedente
         ui.timer.start();                              //fa partire il timer
     }
-
+    /*
   public void house(){
       prepareText();
       ui.text=map.house.getDescription();

@@ -4,15 +4,22 @@ import java.util.List;
 import ObjectSet.Stobj;
 import java.util.ArrayList;
 import RoomSet.Room;
+import java.io.Serializable;
+import java.util.Arrays;
+
 
 
 public class Player {
 
     private final int tothp=40;
     private int currenthp=40;
+  
+public class Player implements Serializable {
+    
+    private int hp=20;
     private Stobj weapon;
     private int money=0;
-    private List<Stobj> inventory = new ArrayList<>();
+    private List<Stobj> inventory = new ArrayList<>(Arrays.asList(null,null,null,null,null,null,null,null,null,null,null,null));
     private Room currentRoom = new Room();
     private Room previousRoom = new Room();
 

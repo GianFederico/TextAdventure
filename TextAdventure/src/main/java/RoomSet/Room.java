@@ -1,12 +1,13 @@
 package RoomSet;
 
 import ObjectSet.Stobj;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import newpackage01.Player;
 import newpackage03.SuperMonster;
 
-public class Room {
+public class Room  implements Serializable {
 
     //private int id;
     private String name;

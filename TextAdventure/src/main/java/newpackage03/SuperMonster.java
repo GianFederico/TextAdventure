@@ -5,9 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 import newpackage01.Player;
 import ObjectSet.*;
+import java.io.Serializable;
 import java.util.Random;
 
-public class SuperMonster {  //TODO renderla un'interfaccia
+public class SuperMonster  implements Serializable{  //TODO renderla un'interfaccia
     private String name;
     private String description;
     private Set<String> aka;

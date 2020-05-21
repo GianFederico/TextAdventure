@@ -1,13 +1,14 @@
 
 package ObjectSet;
 
-import newpackage01.Player;
 
+import newpackage01.Player;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Stobj {
+public class Stobj implements Serializable {
     
     private String name;
     private String description;
