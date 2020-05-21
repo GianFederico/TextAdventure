@@ -49,7 +49,7 @@ public class Game {
         FileOutputStream fileStream = new FileOutputStream(file);   
         ObjectOutputStream objectStream = new ObjectOutputStream(fileStream);   
 
-        objectStream.writeObject(player.getHp());         
+        objectStream.writeObject(player.getCurrentHp());
         objectStream.writeObject(player.getWeapon());   //??
         objectStream.writeObject(player.getMoney());   
         objectStream.writeObject(player.getInventory());   
@@ -71,7 +71,7 @@ public class Game {
     FileInputStream fileStream = new FileInputStream(file);   
     ObjectInputStream objectStream = new ObjectInputStream(fileStream);   
 
-    player.setHp( (int) objectStream.readObject());
+    player.setCurrentHp( (int) objectStream.readObject());
     player.setWeapon((Stobj) objectStream.readObject());     
     player.setMoney((int) objectStream.readObject());   
     player.setInventory((List<Stobj>) objectStream.readObject());   

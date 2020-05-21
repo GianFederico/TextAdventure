@@ -29,7 +29,7 @@ public class Story {
 
 
         //game.player.setCurrentHp(10);
-        ui.hpNumberLable.setText(""+ player.getCurrentHp() + "/" + player.getTotHp());
+        ui.hpNumberLable.setText(""+ game.player.getCurrentHp() + "/" + game.player.getTotHp());
 
         
         game.player.setWeapon(null);
@@ -40,7 +40,7 @@ public class Story {
     }
     
     
-    public void selectPosition(String nextPosition){           //questi saranno tutti i possibili case
+   /* public void selectPosition(String nextPosition){           //questi saranno tutti i possibili case
         switch(nextPosition){
             case "storyBegins": storyBegins();
             break;
@@ -61,7 +61,7 @@ public class Story {
     }
     
 
-    public void storyBegins(){
+   /* public void storyBegins(){
        prepareText();  
        ui.text=map.house.getDescription();
 
@@ -70,7 +70,7 @@ public class Story {
         ui.choice2.setText("Va via");
         ui.choice3.setText("Dormi per terra");
         ui.choice4.setText("Guarda il cielo");
-        */
+
     
         
         game.nextPosition1 = "parlaGuardia";                    //questi sono parametri per ogni pulsante, anche questi vanno rimossi
@@ -78,7 +78,7 @@ public class Story {
         game.nextPosition3 = "dormi";
         game.nextPosition4 = "guardaCielo";
     }
-    
+
     
     
     
@@ -86,13 +86,13 @@ public class Story {
         prepareText();   
        if (silverRing==0){
        ui.text="Ciao, io sono Dio,\nmi dispiace ma questo non e' il tuo posto, devo rimandarti indietro"; 
-       
+       */
         
        /* ui.choice1.setText("indietro");               
         ui.choice2.setText("");
         ui.choice3.setText("");
         ui.choice4.setText("");
-        */
+
     
         game.nextPosition1 = "storyBegins";               
         game.nextPosition2 = "";
@@ -105,13 +105,13 @@ public class Story {
     }
     public void vaiVia(){
         prepareText();   ui.text="Dove vorresti andare?"; 
-        
+
         
        /* ui.choice1.setText("nord");               
         ui.choice2.setText("est");
         ui.choice3.setText("rimani a sud");
         ui.choice4.setText("ovest");
-        */
+
     
         game.nextPosition1 = "nord";                    
         game.nextPosition2 = "est";
@@ -130,7 +130,7 @@ public class Story {
         ui.choice2.setText("");
         ui.choice3.setText("");
         ui.choice4.setText("");
-        */
+
     
         game.nextPosition1 = "storyBegins";                    
         game.nextPosition2 = "";
@@ -149,7 +149,7 @@ public class Story {
         ui.choice2.setText("");
         ui.choice3.setText("");
         ui.choice4.setText("");
-        */
+
     
         game.nextPosition1 = "storyBegins";                    
         game.nextPosition2 = "";
@@ -163,7 +163,7 @@ public class Story {
         defaultSetup();
         vm.showTitleScreen();
         
-    }
+    }*/
 
  //==============================================================ACTUAL STORY============================================================================     
     public void prepareText(){
