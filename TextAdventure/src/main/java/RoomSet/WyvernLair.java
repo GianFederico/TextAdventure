@@ -2,6 +2,7 @@ package RoomSet;
 
 import ObjectSet.Stobj;
 import newpackage01.Player;
+import newpackage01.UI;
 import newpackage03.SuperMonster;
 import newpackage03.Monster_Viverna;
 
@@ -21,9 +22,9 @@ public class WyvernLair extends Room{
         this.addObject(obj);
     }
     
-    public void fightSequence(Player p){
+    public void fightSequence(Player p, UI ui){
         if (!this.win) {
-            this.win = this.getMonster().fightMonster(p, this.getMonster());
+            this.win = this.getMonster().fightMonster(p, this.getMonster(), ui);
             if (this.win) {
                 this.setMonster(null);
                 Stobj deadwyv = new Stobj("Carcassa della viverna", "Il cadavere della viverna che hai sconfitto. Ha una gemma incastonata nella fronte che attira la tua attenzione");

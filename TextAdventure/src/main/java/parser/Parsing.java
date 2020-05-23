@@ -47,7 +47,7 @@ public class Parsing {
         return sw;
     }*/
 
-    public ParserOut parse(String command, List<Command> commands, List<Stobj> objects, List<Stobj> inventory) {
+   public ParserOut parse(String command, List<Command> commands, List<Stobj> objects, List<Stobj> inventory) {
         String cmd = command.toLowerCase().trim();
         String[] tokens = cmd.split("\\s+");
         int i = 0;

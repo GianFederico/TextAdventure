@@ -15,6 +15,8 @@ public class ShamSecretRoom extends Room{ //TODO aggiungere interazione con la p
 
     public void getPotion(){
         System.out.println("");
+        Stobj portal = new Stobj("Portale", "Descrizione portale");
+        this.addObject(portal);
         this.setNorth(this.getNextNorth());
     }
     

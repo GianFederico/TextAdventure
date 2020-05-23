@@ -5,6 +5,7 @@ import newpackage03.SuperMonster;
 import newpackage03.Monster_Hobgoblin;
 import ObjectSet.Stobj;
 import ObjectSet.Door;
+import newpackage01.UI;
 
 
 public class MountFork extends RoomWDoor{
@@ -28,9 +29,9 @@ public class MountFork extends RoomWDoor{
         this.addObject(door);
     }
     
-    public void fightSequence(Player p){
+    public void fightSequence(Player p, UI ui){
         if (!this.win) {
-            this.win = this.getMonster().fightMonster(p, this.getMonster());
+            this.win = this.getMonster().fightMonster(p, this.getMonster(), ui);
             if (this.win) {
                 this.setMonster(null);
                 Stobj deadhob = new Stobj("Carcassa del goblin", "Il cadavere dell'hobgoblin che hai sconfitto. Riesce ad emanare un odore peggiore di quando era in vita...per quanto possibile...");

@@ -20,6 +20,7 @@ public class WestLake extends Room{
                int i = 0;
                int k = 0;
                Stobj adv = new Stobj("Consiglio", "Un pezzo di carta sul quale hai appuntato il consiglio della ninfa del lago. Dice di tirare la leva destra");
+               adv.setVisible(false);
                adv.setAka(new String[]{"appunto"});
                for (Stobj inv : p.getInventory()) {
                    if (inv.getName().equals("spada") || inv.getName().equals("coltello")) {
@@ -28,14 +29,14 @@ public class WestLake extends Room{
                    i++;
                }
                ((Weapon) p.getInventory().get(k)).setDamage(((Weapon) p.getInventory().get(k)).getDamage() + 5);
-               System.out.println("Il consiglio della ninfa è stato aggiunto all'inventario");
+               this.setMsg("Il consiglio della ninfa è stato aggiunto all'inventario" + "\n" + "La ninfa ti ringrazia un'ultima volta prima di sparire davanti ai tuoi occhi");
                p.addToInventory(adv);
-               System.out.println("La ninfa ti ringrazia un'ultima volta prima di sparire davanti ai tuoi occhi");
                this.nym = false;
                this.getObjects().get(0).setDescription(this.getObjects().get(0).getDescription() + "Purtroppo è svanita e non è più qui");
            } else {
-               System.out.println("La ninfa non è più qui e non vedi tracce per capire dove sia andata o seguirla...");
+                this.setMsg("La ninfa non è più qui e non vedi tracce per capire dove sia andata o seguirla...");
            }
        }
    }
+   
 }

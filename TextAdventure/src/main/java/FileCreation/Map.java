@@ -4,6 +4,7 @@ import RoomSet.*;
 import ObjectSet.Stobj;
 import ObjectSet.Door;
 import java.io.Serializable;
+import newpackage01.UI;
 
 
 public class Map implements Serializable{
@@ -15,7 +16,7 @@ public class Map implements Serializable{
     private Room fclearing= new ForestClearing();
     private Room fcliff= new Room("dirupo foresta","Il vento si fa più forte, e anche più fresco, la vegetazione si "
                                                     + "dirada e davanti a te scorgi un grosso dirupo che ti offre un panorma"
-                                                    + " mozzafiato ma, non puoi continuare da qui.");
+                                                    + " mozzafiato ma, non puoi continuare da qui." );
     private Room tolake = new ToLake();
     private Room wlake = new WestLake();
     private Room forestend = new Room("piedi della montagna", ""); //TODO descrizione
@@ -42,6 +43,7 @@ public class Map implements Serializable{
                                        + "Tuo padre è morto anni fa. Solo tu puoi fare qualcosa per salvarla.\n" 
                                        +"\n" +"Che vuoi fare?");
         house.setNextNorth(square);
+        //house.setUi(ui);
       
         //Piazza centrale
         square.setName("Piazza");
@@ -154,7 +156,7 @@ public class Map implements Serializable{
         ((Door)door).setDirection("n");
         storage.addObject(door);
         door = new Door();
-        door.setName("Porta");
+        //door.setName("Porta");
         door.setDescription("Una semplice porta di legno. E' aperta");
         ((Door)door).setOpen(true);
         ((Door)door).setDirection("w");
@@ -196,4 +198,156 @@ public class Map implements Serializable{
     public Room getPreviousRoom(){
         return this.previousRoom;
     }
+    
+    public void setMap(Map m){
+       this.setHouse(m.getHouse());
+       this.setSquare(m.getSquare());
+       this.setAlchemshop(m.getAlchemshop());
+       this.setBlksmith(m.getBlksmith());
+       this.setNgate(m.getNgate());
+       this.setFclearing(m.getFclearing());
+       this.setFcliff(m.getFcliff());
+       this.setTolake(m.getTolake());
+       this.setWlake(m.getWlake());
+       this.setForestend(m.getForestend());
+       this.setMountstart(m.getMountstart());
+       this.setFork(m.getFork());
+       this.setWlair(m.getWlair());
+       this.setStorage(m.getStorage());
+       this.setShamanroom(m.getShamanroom());
+       this.setCloset(m.getCloset());
+       this.setCurrentRoom(m.getCurrentRoom());
+       this.setPreviousRoom(m.getPreviousRoom());
+      
+    }
+
+    public Room getHouse() {
+        return house;
+    }
+
+    public void setHouse(Room house) {
+        this.house = house;
+    }
+
+    public Room getSquare() {
+        return square;
+    }
+
+    public void setSquare(Room square) {
+        this.square = square;
+    }
+
+    public Room getAlchemshop() {
+        return alchemshop;
+    }
+
+    public void setAlchemshop(Room alchemshop) {
+        this.alchemshop = alchemshop;
+    }
+
+    public Room getBlksmith() {
+        return blksmith;
+    }
+
+    public void setBlksmith(Room blksmith) {
+        this.blksmith = blksmith;
+    }
+
+    public Room getNgate() {
+        return ngate;
+    }
+
+    public void setNgate(Room ngate) {
+        this.ngate = ngate;
+    }
+
+    public Room getFclearing() {
+        return fclearing;
+    }
+
+    public void setFclearing(Room fclearing) {
+        this.fclearing = fclearing;
+    }
+
+    public Room getFcliff() {
+        return fcliff;
+    }
+
+    public void setFcliff(Room fcliff) {
+        this.fcliff = fcliff;
+    }
+
+    public Room getTolake() {
+        return tolake;
+    }
+
+    public void setTolake(Room tolake) {
+        this.tolake = tolake;
+    }
+
+    public Room getWlake() {
+        return wlake;
+    }
+
+    public void setWlake(Room wlake) {
+        this.wlake = wlake;
+    }
+
+    public Room getForestend() {
+        return forestend;
+    }
+
+    public void setForestend(Room forestend) {
+        this.forestend = forestend;
+    }
+
+    public Room getMountstart() {
+        return mountstart;
+    }
+
+    public void setMountstart(Room mountstart) {
+        this.mountstart = mountstart;
+    }
+
+    public Room getFork() {
+        return fork;
+    }
+
+    public void setFork(Room fork) {
+        this.fork = fork;
+    }
+
+    public Room getWlair() {
+        return wlair;
+    }
+
+    public void setWlair(Room wlair) {
+        this.wlair = wlair;
+    }
+
+    public Room getStorage() {
+        return storage;
+    }
+
+    public void setStorage(Room storage) {
+        this.storage = storage;
+    }
+
+    public Room getShamanroom() {
+        return shamanroom;
+    }
+
+    public void setShamanroom(Room shamanroom) {
+        this.shamanroom = shamanroom;
+    }
+
+    public Room getCloset() {
+        return closet;
+    }
+
+    public void setCloset(Room closet) {
+        this.closet = closet;
+    }
+    
+    
 }

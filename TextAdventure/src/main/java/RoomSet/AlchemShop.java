@@ -6,6 +6,7 @@ import ObjectSet.Stobj;
 import java.util.Iterator;
 import java.util.Scanner;
 import newpackage01.Player;
+import newpackage01.UI;
 
 public class AlchemShop extends Room{
 
@@ -22,7 +23,10 @@ public class AlchemShop extends Room{
     }
     
     @Override
-    public void buy(Player p, Stobj buy){
+    public void buy(Player p, Stobj buy, UI ui){
+         if (buy.getName().equals("commessa")){
+            ui.setText("hahahasdbfiu");
+        }
         boolean nl = false;
         int pot = 3;
         int k = 0;
@@ -40,17 +44,17 @@ public class AlchemShop extends Room{
                 }
                 if (nl){
                     while (!c){
-                        System.out.println("Non hai abbastanza soldi per permettertene una ma, "
+                        ui.setText("Non hai abbastanza soldi per permettertene una ma, "
                                 + "notando il tuo ciondolo, la commessa ti propone uno scambio:"
                                 + "\n" + "Il gioiello in cambio di 2 pozioni e 5 monete."
                                 + "\n" + "Che ne dici? [ok/no]");
-                        Scanner scanner = new Scanner(System.in);
-                        if (scanner.hasNextLine()){
-                            String s = scanner.nextLine();
-                            s.toLowerCase();
-                            switch (s){
+                        //Scanner scanner = new Scanner(System.in);
+                        String campo = ui.getCampo().getText().toLowerCase();
+                        if (!campo.equals("")){
+                           // String s = campo.toLowerCase();
+                            switch (campo){
                                 case "ok":
-                                    System.out.println("Scambio accettato");
+                                    ui.setText("Scambio accettato");
                                     p.setMoney(p.getMoney()+5);
                                     this.getObjects().get(2).setDescription(this.getObjects().get(2).getDescription().substring(this.getObjects().get(2).getDescription().length()-15));
                                     this.getObjects().get(2).setUsable(true);
@@ -66,20 +70,20 @@ public class AlchemShop extends Room{
                                     c = true;
                                     break;
                                 case "no":
-                                    System.out.println("Peccato");
+                                    ui.setText("Peccato");
                                     c = true;
                                     break;
                                 default: 
-                                    System.out.println("Inserisci una scelta valida");
+                                    ui.setText("Inserisci una scelta valida");
                                     break;
                             }
                         }
                     }   
                 } else {
-                        System.out.println("Non hai abbastanza soldi per concludere l'acquisto");
+                        ui.setText("Non hai abbastanza soldi per concludere l'acquisto");
                 }
             } else {
-                System.out.println("Con un sorriso, la commessa ti porge la pozione e si prende le tue monete.");
+                ui.setText("Con un sorriso, la commessa ti porge la pozione e si prende le tue monete.");
                 p.setMoney(p.getMoney()-5);
                 this.getObjects().get(0).setUsable(true);
                 this.getObjects().get(0).setDescription(this.getObjects().get(0).getDescription().substring(this.getObjects().get(0).getDescription().length()-15));
@@ -89,7 +93,7 @@ public class AlchemShop extends Room{
                 //aq = true;
             }
         } else {
-            System.out.println("Purtroppo le pozioni acquistabili sono terminate");
+            ui.setText("Purtroppo le pozioni acquistabili sono terminate");
         }
         //return aq;
     }

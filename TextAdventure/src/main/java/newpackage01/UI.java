@@ -26,19 +26,21 @@ import newpackage01.Game.InventoryHandler;
 public class UI  {
     JFrame window;                                                                                                                                                                                                                                                                   //FINESTRA GENERALE
     JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel, playerPanel, inventoryPanel, inventoryDescPanel;                                                                                               //pannelli vari all'interno della finestra
-    JLabel titleNameLabel, hpLabel, hpNumberLable, weaponLabel, weaponNameLabel, inv1, inv2, inv3, inv4, inv5, inv6, inv7, inv8, inv9, inv10, inv11, inv12;                 //parti dei pannelli
+    JLabel titleNameLabel, hpLabel, hpNumberLable, weaponLabel, weaponNameLabel, currentRoomLable,currentRoomNameLable, inv1, inv2, inv3, inv4, inv5, inv6, inv7, inv8, inv9, inv10, inv11, inv12;                 //parti dei pannelli
     JButton startButton, submit, inventoryButton, startButton1, saveButton, continueButton;                                                                                                                                     //pulsanti
-    JTextField campo;
+    private JTextField campo;
     JTextArea mainTextArea,invInfoArea;                                                                                                                                                                                                                                                       //area del testo in game
     Font titleFont= new Font("Times New Roman", Font.PLAIN, 85);
     Font normalFont= new Font("Times New Roman", Font.PLAIN, 18);
     Font invFont=new Font("Times New Roman", Font.PLAIN, 14);
     Timer timer;
-        String text; //serve in timer 
+        private String text; //serve in timer 
         int i=0;//serve in timer
         String desc=""; //descrizione degli oggetti nell'inventario    
     
         Game game;
+        
+        private String campotxt = new String();
 
     public void createUI(ChoiceHandler cHandler, InventoryHandler invHandler){
         
@@ -513,16 +515,13 @@ public class UI  {
         campo.setForeground(Color.white);
         campo.setFont(normalFont);
         campo.addActionListener(cHandler);
+        campo.setActionCommand("submit"); //questo doveva stare fuori dall'action listener
         choiceButtonPanel.add(campo);
         
-                            campo.addActionListener(new ActionListener(){
-                                                    @Override
-                                                    public void actionPerformed(ActionEvent e){
-                                                           String campotxt=campo.getText();
-
-                                                           campo.setText("");
-                                                    }
-                                                });
+                   campo.addActionListener((ActionEvent e) -> {
+                            campotxt = campo.getText();     
+                            campo.setText("");
+        });
         
         submit= new JButton ("Submit");
         submit.setBackground(Color.black);        
@@ -535,8 +534,8 @@ public class UI  {
                             submit.addMouseListener(new MouseAdapter(){
                                 @Override
                                 public void mousePressed(MouseEvent evt) {
-                                        String campotxt = campo.getText();
-                                        submit.setActionCommand(campotxt);
+                                        campotxt = campo.getText();
+                                        submit.setActionCommand("submit");
                                         
                                         campo.setText("");
                                 }
@@ -565,6 +564,15 @@ public class UI  {
         weaponNameLabel.setForeground(Color.white);
         weaponNameLabel.setFont(normalFont);
         playerPanel.add(weaponNameLabel); 
+        
+        currentRoomLable= new JLabel("STANZA:");
+        currentRoomLable.setForeground(Color.white);
+        currentRoomLable.setFont(normalFont);
+        playerPanel.add(currentRoomLable);
+        currentRoomNameLable= new JLabel();
+        currentRoomNameLable.setForeground(Color.white);
+        currentRoomNameLable.setFont(normalFont);
+        playerPanel.add(currentRoomNameLable); 
         
         inventoryButton = new JButton("Zaino");
         inventoryButton.setBackground(Color.black);
@@ -596,11 +604,25 @@ public class UI  {
 
        public void inputDescription1(){
        prepareText();  
-       text="In questo gioco impersonerai un giovanissimo avventuriero, in un ambiente fantasy, che si ritrova a dover lottare contro la malattia di sua madre, "
+       text="In questo gioco "; /*impersonerai un giovanissimo avventuriero, in un ambiente fantasy, che si ritrova a dover lottare contro la malattia di sua madre, "
                                                         + "alla quale, neanche i chierici del villaggio in cui vivi, hanno saputo dare risposta...\n\n"
                + "L'unica maniera per salvarla, è cercare l'ex sciamano del villaggio, esiliato dagli altri abitanti perchè ritenuto pericoloso, che vive ormai da molti anni "
                                                         + "in solitudine sulla montagna a Nord, oltre la foresta...\n\n"
-               + "DESCRIZIONE COMANDI\n";
+               + "DESCRIZIONE COMANDI\n */
     }
+
+    public String getCampotxt() {
+        return campotxt;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public JTextField getCampo() {
+        return campo;
+    }
+    
+    
 }
 

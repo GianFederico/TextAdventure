@@ -7,6 +7,7 @@ import newpackage01.Player;
 import ObjectSet.*;
 import java.io.Serializable;
 import java.util.Random;
+import newpackage01.UI;
 
 public class SuperMonster  implements Serializable{  //TODO renderla un'interfaccia
     private String name;
@@ -99,10 +100,10 @@ public class SuperMonster  implements Serializable{  //TODO renderla un'interfac
 
 
 
-    public boolean fightMonster(Player p, SuperMonster monster){
+    public boolean fightMonster(Player p, SuperMonster monster, UI ui){
     int pldmg = 0;
     int pldef = 0;
-    String input = "";
+    String[] input = new String[2];
     boolean win = false;
     Random random = new Random(); //numero casuale = random.nextInt((max - min) +1) + min
     for (Stobj inv : p.getInventory()) {
@@ -115,41 +116,71 @@ public class SuperMonster  implements Serializable{  //TODO renderla un'interfac
         }
     while (p.getCurrentHp() > 0 || monster.getHp() > 0 || input.equals("scappa")){
         //ad ogni turno viene chiesto cosa si vuole fare: combattere o scappare?
-        while (!input.equals("combatti") || !input.equals("attacca") || !input.equals("scappa") || !input.equals("ritirati")){    //controllo sulla parola inserita->deve essere un verbo che indichi se continuare a combattere o scappare
+        while (!input[0].equals("combatti") || !input[0].equals("attacca") || !input[0].equals("scappa") || !input[0].equals("ritirati") ||!input[0].equals("usa") || !input[0].equals("bevi")){    //controllo sulla parola inserita->deve essere un verbo che indichi se continuare a combattere o scappare
             //se si decide di combattere
             //TODO acquisizione input
-            if (input.equals("combatti") || input.equals("attacca")){
+            if (input[0].equals("combatti") || input[0].equals("attacca")){
 
                 //attacca sempre prima il mostro
                 //con possibilità di colpire = monster.hitRate%
                     if(random.nextInt(100 - 1 + 1)+1 <= monster.getHitRate()){
-                            System.out.println(monster.getAttackMessage());
+                            ui.setText(monster.getAttackMessage());
                             p.setCurrentHp(p.getCurrentHp()-random.nextInt(((monster.getAttack()-pldef)-1)+1)+1); //max=monsterattack-pldef     min=1
                             //TODO se il danno che il mostro riesce a farti, si visualizza un messaggio del tipo "per fortuna è solo un graffio"
                     } else {
-                            System.out.println("Hai schivato il colpo");
+                            ui.setText("Hai schivato il colpo");
                     }
 
                 //poi attacca il giocatore
                 //con possibilità di colpire (100-monster.dodgeRate)
                     if(random.nextInt(100 - 1 + 1)+1 <= (100-monster.getDodgeRate())){
-                        System.out.println("hai colpito");
+                        ui.setText("hai colpito");
                         monster.setHp(monster.getHp()-(random.nextInt((pldmg - (pldmg-5))+1)+(pldmg-5))); //max=pldmg    min=pldmg-5
                      }
                     else{
-                            System.out.println(monster.getDodgeMessage());
+                            ui.setText(monster.getDodgeMessage());
                     }
                     if (monster.hp <= 0){
-                        System.out.println(monster.getName() + " sconfitto");
+                        ui.setText(monster.getName() + " sconfitto");
                         win = true;
                     }
              }
 
             //se si decide di scappare
-            if (input.equals("scappa")){
+            if (input[0].equals("scappa") || input[0].equals("ritirati")){
                 p.setCurrentRoom(p.getPreviousRoom());
             }
+            
+            //se si vuole usare una pozione
+            if (input[0].equals("usa") || input[0].equals("bevi")){
+                if (input[1].equals("pozione")){
+                     int k = -1;
+                    for (int i = 0; i < p.getInventory().size() || k==-1; i++) {
+                        if (p.getInventory().get(i).getName().equals("Pozione")) {
+                            k = i;
+                        }
+                    }
+                    if (k>-1){
+                        p.getInventory().get(k).use(p);
+                        p.removeFromInventory(k);
+                    } else {
+                    int pot = 0;
+                    for (Stobj inv : p.getInventory()) {
+                        if (inv.getName().equals("Pozione")) {
+                            pot++;
+                        }
+                    }
+                    if (pot>0){
+                        ui.setText("Hai ancora " + pot + "x Pozione che puoi usare");
+                    } else {
+                        ui.setText("Non hai più pozioni");
+                    }
+                }
+            } else {
+                    //In combattimento puoi usare solo le pozioni dal tuo inventario
+                }
          }
+    }
     }
     return win;
 }
