@@ -79,4 +79,13 @@ public class Player implements Serializable {
     public Room getPreviousRoom(){
         return this.previousRoom;
     }
+    
+    public void setPlayer(Player p){
+       this.setCurrentRoom(p.getCurrentRoom());
+       this.setCurrentHp(p.getCurrentHp());
+       this.setInventory(p.getInventory());
+       this.setMoney(p.getMoney());
+       this.setPreviousRoom(p.getPreviousRoom());
+       this.setWeapon(p.getWeapon());
+    }
 }

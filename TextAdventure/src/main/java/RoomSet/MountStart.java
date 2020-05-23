@@ -4,6 +4,7 @@ import ObjectSet.Stobj;
 import newpackage03.SuperMonster;
 import newpackage03.Monster_RagnoGigante;
 import newpackage01.Player;
+import newpackage01.UI;
 
 public class MountStart extends RoomWDoor{
 
@@ -31,7 +32,7 @@ public class MountStart extends RoomWDoor{
             // TODO aggiungere descrizione evento
         }
         if (lever.equals(this.getObjects().get(1))){
-            System.out.println("Senti un cigolio, poi un rumore di ingranaggi per poi accorgerti di star cadendo nel vuoto. La leva sinistra era una trappola. Ti risvegli qualche ora dopo ai piedi della montagna. Hai perso 10 HP per la caduta");
+            this.setMsg("Senti un cigolio, poi un rumore di ingranaggi per poi accorgerti di star cadendo nel vuoto. La leva sinistra era una trappola. Ti risvegli qualche ora dopo ai piedi della montagna. Hai perso 10 HP per la caduta");
             this.getObjects().get(2).setVisible(true);
             p.setCurrentHp(p.getCurrentHp()-10);
             p.setCurrentRoom(p.getPreviousRoom());
@@ -39,9 +40,9 @@ public class MountStart extends RoomWDoor{
     }
 
     @Override
-    public void fightSequence(Player p){
+    public void fightSequence(Player p, UI ui){
         if (!this.win) {
-            this.win = this.getMonster().fightMonster(p, this.getMonster());
+            this.win = this.getMonster().fightMonster(p, this.getMonster(), ui);
             if (this.win) {
                 this.setMonster(null);
                 Stobj deadspider = new Stobj("Carcassa del ragno", "Il cadavere del ragno che hai sconfitto");

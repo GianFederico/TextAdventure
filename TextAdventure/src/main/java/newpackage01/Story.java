@@ -10,38 +10,27 @@ import newpackage03.SuperMonster;
 import parser.ParserOut;
 
 public class Story {
-    Game game;
-    UI ui;
     VisibilityManager vm;
-    SuperMonster monster;
-    String  inventoryStatus=null;
-    Map map= new Map();
 
    
-    public Story(Game g, UI userInterface, VisibilityManager vManager){
-        game=g;
-        ui=userInterface;
-        vm=vManager;
+    public Story(){
+       
     }
     
-    public void defaultSetup(){
+     public void defaultSetup(Player p, UI ui, String inventoryStatus ){
     //parametri iniziali prima di iniziare il gioco, o dopo che muori
-
-
         //game.player.setCurrentHp(10);
-        ui.hpNumberLable.setText(""+ game.player.getCurrentHp() + "/" + game.player.getTotHp());
-
-        
-        game.player.setWeapon(null);
-        ui.weaponNameLabel.setText("");
-        
+        ui.hpNumberLable.setText(""+p.getCurrentHp() + "/" + p.getTotHp());
+        p.setWeapon(null);
+        ui.weaponNameLabel.setText(""); 
         inventoryStatus="close";
+        
+        
  
     }
     
-    
-   /* public void selectPosition(String nextPosition){           //questi saranno tutti i possibili case
-        switch(nextPosition){
+   /* public void selectPosition [-->nextMove] (String nextPosition --> ParserOut par){           //questi saranno tutti i possibili case
+        switch(nextPosition --> par.getCommand()){
             case "storyBegins": storyBegins();
             break;
             
@@ -166,115 +155,17 @@ public class Story {
     }*/
 
  //==============================================================ACTUAL STORY============================================================================     
-    public void prepareText(){
+    public void prepareText(UI ui ){
         ui.i=0;                                               //setta i=0 per il timer
         ui.mainTextArea.setText("");       //cancella il testo precedente
         ui.timer.start();                              //fa partire il timer
     }
-    /*
-  public void house(){
-      prepareText();
-      ui.text=map.house.getDescription();
-    }
-   
-   public void centralSquare(){
-       prepareText();      
-       ui.text=map.square.getDescription();
-    }   
-  
-   public void alchemistShop(){
-       prepareText();      
-       ui.text=map.alchemshop.getDescription();
-    }
-
-public void blacksmithShop(){
-    prepareText();
-       ui.text=map.blksmith.getDescription();
-    }     
-
-  public void northGate(){
-      prepareText();    
-      ui.text=map.ngate.getDescription();
-    }     
-
-//forestIntro?
-  
-public void forestClearing(){
-    prepareText();
-        ui.text=map.fclearing.getDescription();
-    }      
-
-public void forestCliff(){
-    prepareText();
-    ui.text=map.fcliff.getDescription();
-    }      
 
 
-public void forestToLake(){
-    prepareText();
-    ui.text=map.tolake.getDescription();
-    }      
-
-public void lakeNynph(){
-    prepareText();
-        ui.text=map.wlake.getDescription();
-    }      
-
-public void forestEnd(){
-    prepareText();
-        ui.text=map.forestend.getDescription();
-    }
-
-
-public void mounainBegins(){
-    prepareText();
-       ui.text=map.mountstart.getDescription();
-    }
-
-
-public void MountainFork(){
-    prepareText();
-        ui.text=map.fork.getDescription();
-    }
-
-
-public void riddleWall(){
-    prepareText();
-    }
-
-
-public void wyvernLair(){
-    prepareText();
-    ui.text=map.wlair.getDescription();
-    }
-
-
-public void tunnelStorage(){
-    prepareText();
-    ui.text=map.storage.getDescription();
-    }
-
-
-public void shamanRoom(){
-    prepareText();
-    ui.text=map.shroom.getDescription();
-    }
-
-
-public void shamanCloset(){
-    prepareText();
-    ui.text=map.closet.getDescription();
-    }
-
-
-public void ending(){
-    prepareText();
-    }
-*/
-
-    public void nextMove(ParserOut par, Player p, Map map){
+    public void nextMove(ParserOut par, Player p, Map map, UI ui){
         if (par.getCommand() == null) {
-            System.out.println("Comando non riconosciuto");
+            prepareText(ui);
+            ui.setText("Comando non riconosciuto");
         } else {
             boolean noroom = false;
             boolean move = false;
@@ -328,18 +219,19 @@ public void ending(){
                 //Inserimento "osserva" o simili
                 if (par.getCommand().getName().equals("osserva")) {
                     if (par.getObject() == null) {
-                        System.out.println(map.getCurrentRoom().getDescription());
+                        prepareText(ui);
+                        ui.setText(map.getCurrentRoom().getDescription());
                         if (map.getCurrentRoom().getObjects().size() >= 1) {
                             int i = 0;
-                            System.out.println("Cio' con cui puoi interagire in questo luogo: ");
+                            ui.setText("Cio' con cui puoi interagire in questo luogo: ");
                             for (Stobj robj : map.getCurrentRoom().getObjects()) {
                                 if (robj.isVisible()) {
-                                    System.out.println(i++ + robj.getName());
+                                    ui.setText(i++ + robj.getName());
                                 }
                             }
                         }
                         if (map.getCurrentRoom().getMoney() > 0) {
-                            System.out.println("Ci sono" + map.getCurrentRoom().getMoney() + "monete. Le raccogli istintivamente. Sarà cleptomania?");
+                            ui.setText("Ci sono" + map.getCurrentRoom().getMoney() + "monete. Le raccogli istintivamente. Sarà cleptomania?");
                             p.setMoney(p.getMoney() + map.getCurrentRoom().getMoney());
                             map.getCurrentRoom().setMoney(0);
                         }
@@ -351,14 +243,16 @@ public void ending(){
                             }
                         }
                         if (k>-1){
-                            System.out.println(map.getCurrentRoom().getObjects().get(k).getDescription());
+                            prepareText(ui);
+                            ui.setText(map.getCurrentRoom().getObjects().get(k).getDescription());
                         } else {
                             for (int i = 0; i < p.getInventory().size() || k==-1; i++) {
                                 if (p.getInventory().get(i).getName().equals(par.getObject().getName())) {
                                     k = i;
                                 }
                             }
-                            System.out.println(map.getCurrentRoom().getObjects().get(k).getDescription());
+                            prepareText(ui);
+                            ui.setText(map.getCurrentRoom().getObjects().get(k).getDescription());
                         }
                     }
                 }
@@ -366,7 +260,8 @@ public void ending(){
                 //Inserimento "raccogli" o simili
                 if (par.getCommand().getName().equals("raccogli")) {
                     if (par.getObject() == null) {
-                        System.out.println("Non ho capito cosa vorresti raccogliere. Specifica cosa raccogliere");
+                        prepareText(ui);
+                        ui.setText("Non ho capito cosa vorresti raccogliere. Specifica cosa raccogliere");
                     } else {
                         //boolean po = false;
                         for (Stobj robj : map.getCurrentRoom().getObjects()) {
@@ -374,14 +269,16 @@ public void ending(){
                                 //po = true;
                                 if (robj.isPickupable()) {
                                     p.addToInventory(robj);
-                                    System.out.println(robj.getName() + " aggiunto al tuo inventario");
+                                    prepareText(ui);
+                                    ui.setText(robj.getName() + " aggiunto al tuo inventario");
                                     map.getCurrentRoom().getObjects().remove(robj);
                                 } else {
-                                    System.out.println("Non puoi raccogliere questo oggetto");
+                                    prepareText(ui);
+                                    ui.setText("Non puoi raccogliere questo oggetto");
                                 }
                             }
                             //if (!po){
-                            //    System.out.println("L'oggetto inserito non esiste in questo luogo");
+                            //    ui.setText("L'oggetto inserito non esiste in questo luogo");
                             //}
                         }
                     }
@@ -394,9 +291,11 @@ public void ending(){
                         if (!map.getCurrentRoom().equals(p.getCurrentRoom())) {
                             map.setPreviousRoom(map.getCurrentRoom());
                             map.setCurrentRoom(p.getCurrentRoom());
+                            move = true;
                         }
                     } else {
-                        System.out.println("Specifica con cosa vorresti interagire");
+                        prepareText(ui);
+                        ui.setText("Specifica con cosa vorresti interagire");
                     }
                 }
 
@@ -405,7 +304,8 @@ public void ending(){
                     if (par.getObject().getName().equals("porta")) {
                         map.getCurrentRoom().openDoor();
                     } else {
-                        System.out.println("L'oggetto a cui ti riferisci non esiste, non è apribile o lo hai scritto in modo incorretto");
+                        prepareText(ui);
+                        ui.setText("L'oggetto a cui ti riferisci non esiste, non è apribile o lo hai scritto in modo incorretto");
                     }
                 }
 
@@ -414,25 +314,29 @@ public void ending(){
                     if (par.getObject().getName().equals("porta")) {
                         map.getCurrentRoom().closeDoor();
                     } else {
-                        System.out.println("L'oggetto a cui ti riferisci non esiste, non è richiudibile o lo hai scritto in modo incorretto");
+                        prepareText(ui);
+                        ui.setText("L'oggetto a cui ti riferisci non esiste, non è richiudibile o lo hai scritto in modo incorretto");
                     }
                 }
 
             }
             else
                 {
-                System.out.println("Non puoi compiere questa azione, la presenza del mostro te lo impedisce");
+                prepareText(ui);
+                ui.setText("Non puoi compiere questa azione, la presenza del mostro te lo impedisce");
             }
             //Inserimento "attacca" o simili
             if (par.getCommand().getName().equals("attacca")) {
                 if (map.getCurrentRoom().getMonster() != null) {
-                    map.getCurrentRoom().fightSequence(p);
+                    map.getCurrentRoom().fightSequence(p, ui);
                     if (!map.getCurrentRoom().equals(p.getCurrentRoom())){
                         map.setPreviousRoom(map.getCurrentRoom());
                         map.setCurrentRoom(p.getCurrentRoom());
+                        move = true;
                     }
                 } else {
-                    System.out.println("Non c'è nulla da combattere qui...");
+                    prepareText(ui);
+                    ui.setText("Non c'è nulla da combattere qui...");
                 }
             }
 
@@ -441,14 +345,16 @@ public void ending(){
                 Room temp = map.getPreviousRoom();
                 map.setPreviousRoom(map.getCurrentRoom());
                 map.setCurrentRoom(temp);
+                move = true;
             }
 
             //Inserimento "compra" o simili (vale solo in blksmith o alchemshop
             if (par.getCommand().getName().equals("compra")) {
                 if (par.getObject() != null){
-                    map.getCurrentRoom().buy(p, par.getObject());
+                    map.getCurrentRoom().buy(p, par.getObject(), ui);
                 } else {
-                    System.out.println("Devi specificare cosa vuoi comprare, nessuno può capire i tuoi bisogni meglio di te");
+                    prepareText(ui);
+                    ui.setText("Devi specificare cosa vuoi comprare, nessuno può capire i tuoi bisogni meglio di te");
                 }
             }
 
@@ -457,7 +363,8 @@ public void ending(){
                 if (par.getObject()!=null){
                     map.getCurrentRoom().talkTo(p, par.getObject());
                 } else {
-                    System.out.println("Con chi vorresti parlare?");
+                    prepareText(ui);
+                    ui.setText("Con chi vorresti parlare?");
                 }
             }
 
@@ -477,11 +384,13 @@ public void ending(){
                 } else if (par.getObject().getName().equals("consiglio")){
                     for (Stobj inv : p.getInventory()) {
                         if (inv.getName().equals("Consiglio")) {
-                            System.out.println(inv.getDescription());
+                            prepareText(ui);
+                            ui.setText(inv.getDescription());
                         }
                     }
                 } else {
-                    System.out.println("Specifica cosa vorresti usare");
+                    prepareText(ui);
+                    ui.setText("Specifica cosa vorresti usare");
                 }
             }
 
@@ -506,14 +415,16 @@ public void ending(){
                         }
                     }
                     if (pot>0){
-                        System.out.println("Hai ancora " + pot + "x Pozione che puoi bere");
+                        prepareText(ui);
+                        ui.setText("Hai ancora " + pot + "x Pozione che puoi bere");
                     } else {
-                        System.out.println("Non hai nulla da bere");
+                        prepareText(ui);
+                        ui.setText("Non hai nulla da bere");
                     }
 
 
-
-                    System.out.println("Specifica cosa vorresti bere");
+                    prepareText(ui);
+                    ui.setText("Specifica cosa vorresti bere");
                 }
             }
 
@@ -522,7 +433,7 @@ public void ending(){
                 if (par.getObject().getName().equals("consiglio")){
                     for (Stobj inv : p.getInventory()) {
                         if (inv.getName().equals("Consiglio")) {
-                            System.out.println(inv.getDescription());
+                            ui.setText(inv.getDescription());
                         }
                     }
                 } else {
@@ -533,9 +444,11 @@ public void ending(){
                         }
                     }
                     if (adv){
-                        System.out.println("L'unica cosa che hai da leggere è il consiglio che ti ha dato la ninfa");
+                        prepareText(ui);
+                        ui.setText("L'unica cosa che hai da leggere è il consiglio che ti ha dato la ninfa");
                     } else {
-                        System.out.println("Non c'è nulla dal leggere");
+                        prepareText(ui);
+                        ui.setText("Non c'è nulla dal leggere");
                     }
                 }
             }
@@ -561,9 +474,11 @@ public void ending(){
                         }
                     }
                     if (f){
-                        System.out.println("L'unica cosa che hai da mangiare è il frutto che hai raccolto");
+                        prepareText(ui);
+                        ui.setText("L'unica cosa che hai da mangiare è il frutto che hai raccolto");
                     } else {
-                        System.out.println("Non hai nulla da mangiare");
+                        prepareText(ui);
+                        ui.setText("Non hai nulla da mangiare");
                     }
                 }
             }
@@ -572,14 +487,19 @@ public void ending(){
             if (par.getCommand().getName().equals("q")) {
                 map.getCurrentRoom().riddle();
             }
+            
+            prepareText(ui);
+            ui.setText(map.getCurrentRoom().getMsg());
 
             if (noroom) {
-                System.out.println("Non puoi proseguire in quella direzione");
-            } else if (move) {
-                System.out.println(map.getCurrentRoom().getName());
-                System.out.println("================================================");
-                System.out.println(map.getCurrentRoom().getDescription());
-            }
+                prepareText(ui);
+                ui.setText("Non puoi proseguire in quella direzione");
+            }/* else if (move) {
+                prepareText(ui);
+                ui.setText(map.getCurrentRoom().getName());
+                ui.setText("================================================");
+                ui.setText(map.getCurrentRoom().getDescription());
+            }*/
 
 
 

@@ -2,8 +2,10 @@ package RoomSet;
 
 import ObjectSet.*;
 import newpackage01.Player;
+import newpackage01.UI;
 
 public class BlackSmith extends Room{
+    
 
     public BlackSmith(){
         Stobj lsword = new Weapon();
@@ -27,31 +29,32 @@ public class BlackSmith extends Room{
     }
     
     @Override
-    public void buy(Player p, Stobj buy){
+    public void buy(Player p, Stobj buy, UI ui){
         if (buy.getName().equals("fabbro")){
-            System.out.println("Sarebbe comodo poterlo portare insieme durante la tua avventura ma purtroppo non puoi. Ha una famiglia da mantenere e deve tornare a lavoro");
+            ui.setText("Sarebbe comodo poterlo portare insieme durante la tua avventura ma purtroppo non puoi. Ha una famiglia da mantenere e deve tornare a lavoro");
         }
         //boolean aq = false;
         if (this.getObjects().contains(buy)){
             if (p.getMoney()<2){
-                System.out.println("Non hai abbastanza denaro per concludere l'acquisto");
+                  ui.setText("Non hai abbastanza denaro per concludere l'acquisto");
             } else {
-                System.out.println("Hai ottenuto una" + buy.getName());
-                //aq = true;
-                buy.setDescription(buy.getDescription().substring(buy.getDescription().length()-15));
-                p.addToInventory(buy);
-                p.setMoney(p.getMoney()-2);
-                this.getObjects().remove(buy);
                 if (buy.getName().equals("spada")){
                     for (int i = 0; i < p.getInventory().size(); i++) {
                         if (p.getInventory().get(i).getName().equals("coltello")) {
                             p.removeFromInventory(i);
+                             ui.setText ("Hai ottenuto una" + buy.getName() + ". Lasci il coltello al fabbro");
                         }
                     }
+                } else {
+                       ui.setText("Hai ottenuto una" + buy.getName());
                 }
+                buy.setDescription(buy.getDescription().substring(buy.getDescription().length()-15));
+                p.addToInventory(buy);
+                p.setMoney(p.getMoney()-2);
+                this.getObjects().remove(buy);
             }
         } else {
-            System.out.println("La " + buy.getName() + " non è più disponibile. Probabilmente l'hai già acquistata");
+              ui.setText("La " + buy.getName() + " non è più disponibile. Probabilmente l'hai già acquistata");
         }
         //return aq;
     }
@@ -59,8 +62,9 @@ public class BlackSmith extends Room{
     @Override
     public void talkTo(Player p, Stobj person){
         if (person.getName().equals("fabbro")){
-            //TODO parla col fabbro
+              this.setMsg("Parla col fabbro");
         }
 
     }
+    
 }

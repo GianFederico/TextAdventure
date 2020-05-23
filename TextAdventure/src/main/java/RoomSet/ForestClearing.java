@@ -4,6 +4,7 @@ import newpackage01.Player;
 import newpackage03.SuperMonster;
 import newpackage03.Monster_Lupo;
 import ObjectSet.Stobj;
+import newpackage01.UI;
 
 
 public class ForestClearing extends Room{
@@ -16,9 +17,9 @@ public class ForestClearing extends Room{
     }
 
     @Override
-    public void fightSequence(Player p){
+    public void fightSequence(Player p, UI ui){
         if (!this.win) {
-            this.win = this.getMonster().fightMonster(p, this.getMonster());
+            this.win = this.getMonster().fightMonster(p, this.getMonster(), ui);
             if (this.win) {
                 this.setMonster(null);
                 Stobj deadwolf = new Stobj("carcassa del lupo", "Il cadavere del lupo che hai sconfitto. La tua prima vittoria");

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import newpackage01.Player;
 import newpackage03.SuperMonster;
+import newpackage01.UI;
 
 public class Room  implements Serializable {
 
@@ -23,6 +24,8 @@ public class Room  implements Serializable {
     private Room nextEast = null; 
     private Room nextWest = null;
     private Room nextSouth = null;
+    private UI ui = new UI();
+    private String msg = new String();
            
     public Room() {}
 
@@ -41,7 +44,7 @@ public class Room  implements Serializable {
         this.description = description;
     }
     
-    public Room(String name, String description, List<Stobj> objects) {
+    public Room(String name, String description, List<Stobj> object) {
         this.name = name;
         this.description = description;
         this.objects = objects;
@@ -176,27 +179,50 @@ public class Room  implements Serializable {
         return this.nextSouth;
     }
 
-    public void buy(Player p, Stobj buy) {
-        System.out.println("Non c'è nulla da comprare");
+    public UI getUi() {
+        return ui;
+    }
+
+    public void setUi(UI ui) {
+        this.ui = ui;
+    }
+    
+    public void buy(Player p, Stobj buy ,UI ui) {
+        this.setMsg("Non c'è nulla da comprare");
+    }
+    
+    public void buy(Player p, Stobj buy ) {
+        this.setMsg("Non c'è nulla da comprare");
     }
 
     public void openDoor(){};
 
     public void closeDoor(){};
 
-    public void fightSequence(Player p){} //System.out.println("Non c'è nulla da combattere qui...");
+    public void fightSequence(Player p, UI ui){} //this.setMsg("Non c'è nulla da combattere qui...");
 
     public void riddle(){}
 
     public void talkTo(Player p, Stobj person){
-        System.out.println("Non c'è nessuno con cui parlare");
+        this.setMsg("Non c'è nessuno con cui parlare");
     }
 
     public void activate(Stobj lever, Player p){
-        System.out.println("Qui non c'è nulla da attivare");
+        this.setMsg("Qui non c'è nulla da attivare");
     }
+    
+    
 
     //DA RICORDARE: Se c'è un mostro nella stanza, non ci si può guardare intorno->Si restituisce un messaggio con scritto che il mostro blocca la visuale
     //Significa che Visible degli oggetti serve solo per il muro con l'enigma, la trappola/botola e la gemma della viverna
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+    
     
 }

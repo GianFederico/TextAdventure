@@ -5,6 +5,7 @@ import ObjectSet.Weapon;
 import newpackage01.Player;
 
 public class House extends RoomWDoor{
+    
 
     public House(){
         Stobj knife = new Weapon();
@@ -44,12 +45,14 @@ public class House extends RoomWDoor{
                 }
             }
             if(poz==true){
-                System.out.println("Dai la pozione dello sciamano a tua madre, gliela fai bere tutta d'un fiato e allo stremo delle forze si accascia sul letto in un sonno profondo.\n"
+               this.setMsg ("Dai la pozione dello sciamano a tua madre, gliela fai bere tutta d'un fiato e allo stremo delle forze si accascia sul letto in un sonno profondo.\n"
                         + "passano parecchie ore prima che si risvegli, ma la mattina del giorno dopo apre gli occhi ed è contenta di poterti riabbracciare.\nCe l'hai fatta, l'hai salvata.\nFine.");
             } else {
-                System.out.println(""); //TODO conversazione con la madre senza pozione
+                this.setMsg(""); //TODO conversazione con la madre senza pozione
             }
         }
 
     }
+    
+    
 }

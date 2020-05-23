@@ -1,7 +1,7 @@
 package newpackage01;
 
-import ObjectSet.Stobj;
-import RoomSet.Room;
+import FileCreation.CommandList;
+import FileCreation.Map;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -11,11 +11,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import newpackage01.Game.ChoiceHandler;
 import newpackage01.Game.InventoryHandler;
+import FileCreation.FileWriter;
+import parser.ParserOut;
+import parser.Parsing;
 
 
 
@@ -24,11 +26,16 @@ public class Game {
     ChoiceHandler cHandler= new ChoiceHandler();    
     UI ui= new UI();
     VisibilityManager vm= new VisibilityManager(ui);
-    Story story= new Story(this, ui, vm);
-    String nextPosition1, nextPosition2, nextPosition3, nextPosition4;
+    Story story= new Story();
+    //String nextPosition1, nextPosition2, nextPosition3, nextPosition4;
     InventoryHandler invHandler= new InventoryHandler();
     Player player= new Player();
-    File file = new File("c:\\users\\gianf\\Desktop\\saveFile.txt");
+    Map map = new Map();
+    File file = new File("..\\saveFile.txt");
+    FileWriter fw = new FileWriter();
+    Parsing parser = new Parsing();
+    CommandList cl = new CommandList();
+    String  inventoryStatus=null;
     
     
     public static void main(String[] args){
@@ -39,49 +46,8 @@ public class Game {
     public Game(){
         ui.createUI(cHandler, invHandler);  //accediamo ai metodi della classe UI = crea la finestra di dialogo
         vm.showTitleScreen();   //acceediamo ai metodi della classe VisibilityManager = mostra la schermata iniziale
-        story.defaultSetup();   //accediamo ai metodi della classe Story = con i paramentri di default
+       // defaultSetup(player, ui);   //accediamo ai metodi della classe Story = con i paramentri di default
     }
-    
-    
-     public void saveGameDataToFile(File file) {   
-       
-    try {   
-        FileOutputStream fileStream = new FileOutputStream(file);   
-        ObjectOutputStream objectStream = new ObjectOutputStream(fileStream);   
-
-        objectStream.writeObject(player.getCurrentHp());
-        objectStream.writeObject(player.getWeapon());   //??
-        objectStream.writeObject(player.getMoney());   
-        objectStream.writeObject(player.getInventory());   
-        objectStream.writeObject(player.getCurrentRoom());  //??    
-
-        objectStream.close();   
-        fileStream.close();   
-
-            System.out.println("Save game state successfully."); 
-            
-    } catch (IOException e) {   
-          System.out.println("Failed to save"); 
-        }   
-    }
-    
-     
-    public void loadGameDataFromFile(File file) throws ClassNotFoundException, FileNotFoundException, IOException{   
-
-    FileInputStream fileStream = new FileInputStream(file);   
-    ObjectInputStream objectStream = new ObjectInputStream(fileStream);   
-
-    player.setCurrentHp( (int) objectStream.readObject());
-    player.setWeapon((Stobj) objectStream.readObject());     
-    player.setMoney((int) objectStream.readObject());   
-    player.setInventory((List<Stobj>) objectStream.readObject());   
-    player.setCurrentRoom((Room) objectStream.readObject()); 
-    
-    objectStream.close();
-    System.out.println("load game successefully"); 
-    }
-
-
     
     public class ChoiceHandler implements ActionListener{ //gestore per le scelte che aspetta l'evento(cioè il click)
         @Override
@@ -99,37 +65,30 @@ public class Game {
                     ui.inputDescription1();
                {
                    try {
-                       loadGameDataFromFile(file);
+                     fw. loadGameDataFromFile(file);
                    } catch (ClassNotFoundException | IOException ex) {
                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
                    }
                }
                    break;
-
-                    
-                case "start1": 
+                   
+               case "start1":
                    vm.titleToGame();
-                   story.storyBegins();
-                   break; 
-                    
-                case "c1":
-                    story.selectPosition(nextPosition1);
-                    break;
-                    
-                case "c2":
-                    story.selectPosition(nextPosition2);
-                    break;
-                    
-                case "c3": 
-                    story.selectPosition(nextPosition3);
-                    break;
-                    
-                case "c4":
-                    story.selectPosition(nextPosition4);
-                    break;
+                   defaultSetup(player, ui);
+                   break;
+
+               case "submit":
+                   //System.out.println(ui.getCampotxt());
+                   
+                   ParserOut par = parser.parse(ui.getCampotxt(), cl.getCommands(), map.getCurrentRoom().getObjects(), player.getInventory());
+                   
+                  story.nextMove(par, player, map, ui);
+                  ui.currentRoomNameLable.setText(map.getCurrentRoom().getName());
+                   break;
+            
                   
                 case "salva":
-                    saveGameDataToFile(file);
+                    fw.saveGameDataToFile(file);
                     break;
                     
             }
@@ -145,7 +104,7 @@ public class Game {
                 switch(yourChoice){
                     case "inventoryButton":
 
-                            if(story.inventoryStatus.equals("close")){
+                            if(inventoryStatus.equals("close")){
                                 
                                 vm.openInventory();
                                 
@@ -219,14 +178,14 @@ public class Game {
                                     ui.inv12.setText(player.getInventory().get(11).getName()); 
                                 }
                                 else{
-                                    ui.inv12.setText("nada");
+                                    ui.inv12.setText("");
                                 }
-                                story.inventoryStatus= "open";                    
+                                inventoryStatus= "open";                    
                             }
-                            else if(story.inventoryStatus.equals("open")){
+                            else if(inventoryStatus.equals("open")){
                                 
                             vm.closeInventory();
-                            story.inventoryStatus="close";
+                            inventoryStatus="close";
                             
                             }
                     break;
@@ -234,6 +193,24 @@ public class Game {
                     }
                 }
             }
+        
+        public void defaultSetup(Player p, UI ui){
+    //parametri iniziali prima di iniziare il gioco, o dopo che muori
+
+
+        //game.player.setCurrentHp(10);
+        ui.hpNumberLable.setText(""+p.getCurrentHp() + "/" + p.getTotHp());
+
+        
+       p.setWeapon(null);
+        ui.weaponNameLabel.setText("");
+        
+        inventoryStatus="close";
+ 
+        map.setCurrentRoom(map.getHouse());
+        story.prepareText(ui);
+        ui.setText(map.getCurrentRoom().getDescription());
+    }
         
         }
                 
