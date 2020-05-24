@@ -22,7 +22,7 @@ public class ShamanRoom extends RoomWDoor{
         boolean g = false;
         int k = -1;
         for (int i =0; i<p.getInventory().size(); i++){
-            if (p.getInventory().get(i).getName().equals("gemma")) {
+            if (p.getInventory().get(i).getName().equals("Gemma")) {
                  g = true;
                  k = i;
             }

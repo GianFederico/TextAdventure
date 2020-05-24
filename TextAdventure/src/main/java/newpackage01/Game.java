@@ -81,7 +81,10 @@ public class Game {
                    //System.out.println(ui.getCampotxt());
                    
                    ParserOut par = parser.parse(ui.getCampotxt(), cl.getCommands(), map.getCurrentRoom().getObjects(), player.getInventory());
-                   
+                   System.out.println(par.getCommand().getName());
+                   //System.out.println(par.getObject().getName());
+
+                   //System.out.println(map.getCurrentRoom().getObjects().get(0).getName());
                   story.nextMove(par, player, map, ui);
                   ui.currentRoomNameLable.setText(map.getCurrentRoom().getName());
                    break;
@@ -208,6 +211,7 @@ public class Game {
         inventoryStatus="close";
  
         map.setCurrentRoom(map.getHouse());
+        ui.currentRoomNameLable.setText(map.getCurrentRoom().getName());
         story.prepareText(ui);
         ui.setText(map.getCurrentRoom().getDescription());
     }

@@ -138,7 +138,7 @@ public class Map implements Serializable{
         storage.setDescription("La stanza in cui sei ha un'altra porta sulla parete nord, oltre a quella da cui sei entrato.\\n\" +\n" +
                 "                                                    \"Cosa vuoi fare?");
         obj = new Stobj();
-        obj.setName("Pozione curativa");
+        obj.setName("Pozione");
         obj.setAka(new String[]{"pozione di cura","pozione"});
         obj.setDescription("pozione curativa");
         obj.setPickupable(true);

@@ -12,7 +12,7 @@ public class AlchemShop extends Room{
 
     
     public AlchemShop(){
-        Stobj lady = new Stobj("commessa", "Una gentile commessa. E' l'apprendista dell'alchimista del villaggio. La sfrutta senza pagarla con la promessa di insegnarle le sue tecniche. Fin'ora non ha imparato niente...");
+        Stobj lady = new Stobj("Commessa", "Una gentile commessa. E' l'apprendista dell'alchimista del villaggio. La sfrutta senza pagarla con la promessa di insegnarle le sue tecniche. Fin'ora non ha imparato niente...");
         this.addObject(lady); //TODO aggiungere aka
         Stobj potion = new Potion();
         potion.setName("Pozione");
@@ -24,7 +24,7 @@ public class AlchemShop extends Room{
     
     @Override
     public void buy(Player p, Stobj buy, UI ui){
-         if (buy.getName().equals("commessa")){
+         if (buy.getName().equals("Commessa")){
             ui.setText("hahahasdbfiu");
         }
         boolean nl = false;
@@ -37,7 +37,7 @@ public class AlchemShop extends Room{
             if (p.getMoney() < 5){
                 //Controllo se il ciondolo è nell'inventario e ne salvo la posizione
                 for (int i = 0; i < p.getInventory().size(); i++) {
-                    if (p.getInventory().get(i).getName().equals("ciondolo")) {
+                    if (p.getInventory().get(i).getName().equals("Ciondolo")) {
                         k = i;
                         nl = true;
                     }
@@ -100,7 +100,7 @@ public class AlchemShop extends Room{
     
     @Override
     public void talkTo(Player p, Stobj person){
-        if (person.getName().equals("commessa")){
+        if (person.getName().equals("Commessa")){
             //TODO parla con la commessa dell'alchimista
         }
 

@@ -14,6 +14,7 @@ public class House extends RoomWDoor{
         Stobj mom = new Stobj("Mamma", "Tua madre. Giace nel letto");
 
         knife.setName("Coltello");
+        knife.setAka(new String[]{"arma", "lama"});
         knife.setDescription("Un semplice coltello. Potresti usarlo come arma");
         //TODO dmg coltello
         knife.setPickupable(true);
@@ -31,15 +32,17 @@ public class House extends RoomWDoor{
         ((Door)door).setOpen(false);
         this.addObject(door);
 
+        this.addObject(mom);
+
         this.setMoney(2);
     }
 
     @Override
     public void talkTo(Player p, Stobj person){
-        if (person.getName().equals("mamma")){
+        if (person.getName().equals("Mamma")){
             boolean poz= false;
             for (Stobj inv : p.getInventory()){
-                if (inv.getName().equals("pozione millecure")){
+                if (inv.getName().equals("Pozione millecure")){
                     poz=true;
                     p.removeFromInventory(inv);
                 }

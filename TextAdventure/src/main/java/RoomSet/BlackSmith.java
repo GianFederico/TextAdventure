@@ -30,7 +30,7 @@ public class BlackSmith extends Room{
     
     @Override
     public void buy(Player p, Stobj buy, UI ui){
-        if (buy.getName().equals("fabbro")){
+        if (buy.getName().equals("Fabbro")){
             ui.setText("Sarebbe comodo poterlo portare insieme durante la tua avventura ma purtroppo non puoi. Ha una famiglia da mantenere e deve tornare a lavoro");
         }
         //boolean aq = false;
@@ -38,9 +38,9 @@ public class BlackSmith extends Room{
             if (p.getMoney()<2){
                   ui.setText("Non hai abbastanza denaro per concludere l'acquisto");
             } else {
-                if (buy.getName().equals("spada")){
+                if (buy.getName().equals("Spada")){
                     for (int i = 0; i < p.getInventory().size(); i++) {
-                        if (p.getInventory().get(i).getName().equals("coltello")) {
+                        if (p.getInventory().get(i).getName().equals("Coltello")) {
                             p.removeFromInventory(i);
                              ui.setText ("Hai ottenuto una" + buy.getName() + ". Lasci il coltello al fabbro");
                         }
@@ -61,7 +61,7 @@ public class BlackSmith extends Room{
 
     @Override
     public void talkTo(Player p, Stobj person){
-        if (person.getName().equals("fabbro")){
+        if (person.getName().equals("Fabbro")){
               this.setMsg("Parla col fabbro");
         }
 
