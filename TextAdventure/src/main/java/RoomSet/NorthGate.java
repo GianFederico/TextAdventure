@@ -13,11 +13,11 @@ public class NorthGate extends Room{
     //TODO Va aggiustato
     @Override
     public void talkTo(Player p, Stobj person){
-        if (person.getName().equals("guardia")) {
+        if (person.getName().equals("Guardia")) {
             boolean a = false;
             boolean open = false;
             for (Stobj inv : p.getInventory()) {
-                if (inv.getName().equals("spada lunga") || inv.getName().equals("coltello")) {
+                if (inv.getName().equals("Spada") || inv.getName().equals("Coltello")) {
                     a = true;
                 }
             }

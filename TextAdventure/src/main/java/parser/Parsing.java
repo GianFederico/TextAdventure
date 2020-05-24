@@ -23,17 +23,28 @@ public class Parsing {
 
     private int checkForCommand(String token, List<Command> commands) {
         for (int i = 0; i < commands.size(); i++) {
-            if (commands.get(i).getName().toLowerCase().equals(token) || commands.get(i).getAka().contains(token)) {
+            if (commands.get(i).getName().toLowerCase().equals(token))// || commands.get(i).getAka().contains(token)) {
                 return i;
-            }
+                if (commands.get(i).getAka()!=null) {
+                    if (commands.get(i).getAka().contains(token)){
+                        return i;
+                    }
+                }
         }
         return -1;
     }
 
     private int checkForObject(String token, List<Stobj> objects) {
         for (int i = 0; i < objects.size(); i++) {
-            if (objects.get(i).getName().toLowerCase().equals(token) || objects.get(i).getAka().contains(token)) {
-                return i;
+            String a = objects.get(i).getName().toLowerCase();
+            if (objects != null) {
+                if (objects.get(i).getName().toLowerCase().equals(token))// || objects.get(i).getAka().contains(token)) {
+                    return i;
+                if (objects.get(i).getAka() != null) {
+                    if (objects.get(i).getAka().contains(token)) {
+                        return i;
+                    }
+                }
             }
         }
         return -1;
@@ -57,15 +68,25 @@ public class Parsing {
                 ic = checkForCommand(tokens[i], commands);
                 i++;
             }
-
+            System.out.println(ic);
             i = 0; //riparte dalla prima parola al prossimo controllo
 
             if (ic > -1) {
                 if (tokens.length > 1) {
                     while (io<0 && i<tokens.length){
+                        try {
                         io = checkForObject(tokens[i], objects);
-                        i++;
+                        System.out.println(io + "blub");
+                        i++;}
+                        catch (NullPointerException e){
+                            System.out.println(i);
+                            System.out.println(io);
+                            System.out.println("Boh");
+                            break;
+                        }
                     }
+                    System.out.println(io);
+
                     i = 0;
                     if (io<0) {
                         while (ioinv<0 && i<tokens.length){

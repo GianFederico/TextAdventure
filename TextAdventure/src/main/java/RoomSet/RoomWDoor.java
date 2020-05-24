@@ -1,19 +1,21 @@
 package RoomSet;
 
 import ObjectSet.Door;
+import newpackage01.UI;
+
 import java.util.Scanner;
 
 public class RoomWDoor extends Room {
 
     @Override
-    public void openDoor(){
+    public void openDoor(UI ui){
         int[] d = {0, 0, 0, 0};
         int numd = 0;
         String[] dir = new String[4];
         String s = new String();
         boolean ins = false;
         for (int i = 0; i < this.getObjects().size(); i++) {
-            if (this.getObjects().get(i).getName().equals("porta")) {
+            if (this.getObjects().get(i).getName().equals("Porta")) {
                 d[numd] = i;
                 dir[numd] = ((Door)this.getObjects().get(i)).getDirection();
                 numd++;
@@ -21,33 +23,34 @@ public class RoomWDoor extends Room {
         }
         if (numd>1){
             while (!ins || !s.equals("indietro")){
-                System.out.println("Ci sono " + (numd+1) + " porte che si affacciano su queste direzioni:\n");
+                ui.setText("Ci sono " + (numd+1) + " porte che si affacciano su queste direzioni:\n");
                 for (int i = 0; i < numd+1; i++){
                     switch (dir[i]){
                         case "s":
-                            System.out.println("Sud\n");
+                            ui.setText("Sud\n");
                             break;
                         case "n":
-                            System.out.println("Nord\n");
+                            ui.setText("Nord\n");
                             break;
                         case "w":
-                            System.out.println("Ovest\n");
+                            ui.setText("Ovest\n");
                             break;
                         case "e":
-                            System.out.println("Est\n");
+                            ui.setText("Est\n");
                             break;
                     }
                 }
-                System.out.println("Quale porta vorresti aprire? [direzione o indietro]");
-                Scanner scanner = new Scanner(System.in);
-                if (scanner.hasNextLine()){
-                    s = scanner.nextLine().toLowerCase();
+                ui.setText("Quale porta vorresti aprire? [direzione o indietro]");
+                //Scanner scanner = new Scanner(System.in);
+                String input = ui.getCampotxt().trim();
+                if (!input.equals("")){
+                    s = input.toLowerCase();
                     if (s.startsWith("n") || s.startsWith("s") || s.startsWith("w") || s.startsWith("o") || s.startsWith("e")){
                         for (int i = 0; i < 4; i++) {
                             if (dir[i].equals(s.substring(0, 1))) {
                                 ins = true;
                                 if (((Door) this.getObjects().get(d[i])).isOpen()) {
-                                    System.out.println("Questa porta è già aperta");
+                                    ui.setText("Questa porta è già aperta");
                                 } else {
                                     ((Door) this.getObjects().get(d[i])).setOpen(true);
                                     this.getObjects().get(d[i]).setDescription(this.getObjects().get(d[i]).getDescription().substring(this.getObjects().get(d[i]).getDescription().length() - 6) + "aperta");
@@ -70,16 +73,16 @@ public class RoomWDoor extends Room {
                             }
                         }
                         if (!ins){
-                            System.out.println("Inserisci una delle direzioni disponibili");
+                            ui.setText("Inserisci una delle direzioni disponibili");
                         }
                     } else {
-                        System.out.println("Inserisci una direzione o torna indietro");
+                        ui.setText("Inserisci una direzione o torna indietro");
                     }
                 }
             }
         } else {
             if (((Door)this.getObjects().get(d[0])).isOpen()) {
-                System.out.println("La porta è già aperta");
+                ui.setText("La porta è già aperta");
             } else {
                 ((Door)this.getObjects().get(d[0])).setOpen(true);
                 this.getObjects().get(d[0]).setDescription(this.getObjects().get(d[0]).getDescription().substring(this.getObjects().get(d[0]).getDescription().length() - 6) + "aperta");
@@ -103,14 +106,14 @@ public class RoomWDoor extends Room {
     }
 
     @Override
-    public void closeDoor() {
+    public void closeDoor(UI ui) {
         int[] d = {0, 0, 0, 0};
         int numd = 0;
         String[] dir = new String[4];
         String s = new String();
         boolean ins = false;
         for (int i = 0; i < this.getObjects().size(); i++) {
-            if (this.getObjects().get(i).getName().equals("porta")) {
+            if (this.getObjects().get(i).getName().equals("Porta")) {
                 d[numd] = i;
                 dir[numd] = ((Door)this.getObjects().get(i)).getDirection();
                 numd++;
@@ -118,33 +121,34 @@ public class RoomWDoor extends Room {
         }
         if (numd>1){
             while (!ins || !s.equals("indietro")){
-                System.out.println("Ci sono " + (numd+1) + " porte che si affacciano su queste direzioni:\n");
+                ui.setText("Ci sono " + (numd+1) + " porte che si affacciano su queste direzioni:\n");
                 for (int i = 0; i < numd+1; i++){
                     switch (dir[i]){
                         case "s":
-                            System.out.println("Sud\n");
+                            ui.setText("Sud\n");
                             break;
                         case "n":
-                            System.out.println("Nord\n");
+                            ui.setText("Nord\n");
                             break;
                         case "w":
-                            System.out.println("Ovest\n");
+                            ui.setText("Ovest\n");
                             break;
                         case "e":
-                            System.out.println("Est\n");
+                            ui.setText("Est\n");
                             break;
                     }
                 }
-                System.out.println("Quale porta vorresti chiudere? [direzione o indietro]");
-                Scanner scanner = new Scanner(System.in);
-                if (scanner.hasNextLine()) {
-                    s = scanner.nextLine().toLowerCase();
+                ui.setText("Quale porta vorresti chiudere? [direzione o indietro]");
+                //Scanner scanner = new Scanner(System.in);
+                String input = ui.getCampotxt().trim();
+                if (!input.equals("")) {
+                    s = input.toLowerCase();
                     if (s.startsWith("n") || s.startsWith("s") || s.startsWith("w") || s.startsWith("o") || s.startsWith("e")) {
                         for (int i = 0; i < 4; i++) {
                             if (dir[i].equals(s.substring(0, 1))) {
                                 ins = true;
                                 if (!((Door)this.getObjects().get(d[i])).isOpen()) {
-                                    System.out.println("Questa porta è già chiusa");
+                                    ui.setText("Questa porta è già chiusa");
                                 } else {
                                     ((Door)this.getObjects().get(d[i])).setOpen(false);
                                     this.getObjects().get(d[i]).setDescription(this.getObjects().get(d[i]).getDescription().substring(this.getObjects().get(d[i]).getDescription().length() - 6) + "aperta");
@@ -167,16 +171,16 @@ public class RoomWDoor extends Room {
                             }
                         }
                         if (!ins){
-                            System.out.println("Inserisci una delle direzioni disponibili");
+                            ui.setText("Inserisci una delle direzioni disponibili");
                         }
                     } else {
-                        System.out.println("Inserisci una direzione o torna indietro");
+                        ui.setText("Inserisci una direzione o torna indietro");
                     }
                 }
             }
         } else {
             if (!((Door)this.getObjects().get(d[0])).isOpen()) {
-                System.out.println("La porta è già chiusa");
+                ui.setText("La porta è già chiusa");
             } else {
                 ((Door)this.getObjects().get(d[0])).setOpen(false);
                 this.getObjects().get(d[0]).setDescription(this.getObjects().get(d[0]).getDescription().substring(this.getObjects().get(d[0]).getDescription().length() - 6) + "aperta");

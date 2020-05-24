@@ -103,6 +103,7 @@ public class SuperMonster  implements Serializable{  //TODO renderla un'interfac
     public boolean fightMonster(Player p, SuperMonster monster, UI ui){
     int pldmg = 0;
     int pldef = 0;
+    String uitext = "";
     String[] input = new String[2];
     boolean win = false;
     Random random = new Random(); //numero casuale = random.nextInt((max - min) +1) + min
@@ -118,7 +119,8 @@ public class SuperMonster  implements Serializable{  //TODO renderla un'interfac
         //ad ogni turno viene chiesto cosa si vuole fare: combattere o scappare?
         while (!input[0].equals("combatti") || !input[0].equals("attacca") || !input[0].equals("scappa") || !input[0].equals("ritirati") ||!input[0].equals("usa") || !input[0].equals("bevi")){    //controllo sulla parola inserita->deve essere un verbo che indichi se continuare a combattere o scappare
             //se si decide di combattere
-            //TODO acquisizione input
+            uitext = ui.getCampotxt().trim();
+            input = uitext.split("\\s+");;
             if (input[0].equals("combatti") || input[0].equals("attacca")){
 
                 //attacca sempre prima il mostro

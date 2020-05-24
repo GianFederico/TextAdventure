@@ -221,7 +221,7 @@ public class Story {
                     if (par.getObject() == null) {
                         prepareText(ui);
                         ui.setText(map.getCurrentRoom().getDescription());
-                        if (map.getCurrentRoom().getObjects().size() >= 1) {
+                        if (map.getCurrentRoom().getObjects().size() > 0) {
                             int i = 0;
                             ui.setText("Cio' con cui puoi interagire in questo luogo: ");
                             for (Stobj robj : map.getCurrentRoom().getObjects()) {
@@ -287,11 +287,13 @@ public class Story {
                 //Inserimento "premi" o simili SOLO per l'attivazione delle leve
                 if (par.getCommand().getName().equals("premi")) {
                     if (par.getObject() != null) {
-                        map.getCurrentRoom().activate(par.getObject(), p);
-                        if (!map.getCurrentRoom().equals(p.getCurrentRoom())) {
-                            map.setPreviousRoom(map.getCurrentRoom());
-                            map.setCurrentRoom(p.getCurrentRoom());
-                            move = true;
+                        if (par.getObject().getName().equals("Leva destra") || par.getObject().getName().equals("Leva sinistra")){
+                            map.getCurrentRoom().activate(par.getObject(), p);
+                            if (!map.getCurrentRoom().equals(p.getCurrentRoom())) {
+                                map.setPreviousRoom(map.getCurrentRoom());
+                                map.setCurrentRoom(p.getCurrentRoom());
+                                move = true;
+                            }
                         }
                     } else {
                         prepareText(ui);
@@ -301,8 +303,10 @@ public class Story {
 
                 //Inserimento "apri" o simili (vale solo per le porte)
                 if (par.getCommand().getName().equals("apri")) {
-                    if (par.getObject().getName().equals("porta")) {
-                        map.getCurrentRoom().openDoor();
+                    if (par.getObject() != null) {
+                        if (par.getObject().getName().equals("Porta")) {
+                            map.getCurrentRoom().openDoor(ui);
+                        }
                     } else {
                         prepareText(ui);
                         ui.setText("L'oggetto a cui ti riferisci non esiste, non è apribile o lo hai scritto in modo incorretto");
@@ -311,8 +315,10 @@ public class Story {
 
                 //Inserimento "chiudi" o simili (vale solo per le porte)
                 if (par.getCommand().getName().equals("chiudi")) {
-                    if (par.getObject().getName().equals("porta")) {
-                        map.getCurrentRoom().closeDoor();
+                    if (par.getObject() != null) {
+                        if (par.getObject().getName().equals("Porta")) {
+                            map.getCurrentRoom().closeDoor(ui);
+                        }
                     } else {
                         prepareText(ui);
                         ui.setText("L'oggetto a cui ti riferisci non esiste, non è richiudibile o lo hai scritto in modo incorretto");
@@ -370,22 +376,24 @@ public class Story {
 
             //Inserimento "usa" o simili (vale solo per le pozioni e per il consiglio)
             if (par.getCommand().getName().equals("usa")) {
-                if (par.getObject().getName().equals("pozione")){
-                    int k = -1;
-                    for (int i = 0; i < p.getInventory().size() || k==-1; i++) {
-                        if (p.getInventory().get(i).getName().equals("Pozione")) {
-                            k = i;
+                if (par.getObject() != null) {
+                    if (par.getObject().getName().equals("Pozione")) {
+                        int k = -1;
+                        for (int i = 0; i < p.getInventory().size() || k == -1; i++) {
+                            if (p.getInventory().get(i).getName().equals("Pozione")) {
+                                k = i;
+                            }
                         }
-                    }
-                    if (k>-1){
-                        p.getInventory().get(k).use(p);
-                        p.removeFromInventory(k);
-                    }
-                } else if (par.getObject().getName().equals("consiglio")){
-                    for (Stobj inv : p.getInventory()) {
-                        if (inv.getName().equals("Consiglio")) {
-                            prepareText(ui);
-                            ui.setText(inv.getDescription());
+                        if (k > -1) {
+                            p.getInventory().get(k).use(p);
+                            p.removeFromInventory(k);
+                        }
+                    } else if (par.getObject().getName().equals("Consiglio")) {
+                        for (Stobj inv : p.getInventory()) {
+                            if (inv.getName().equals("Consiglio")) {
+                                prepareText(ui);
+                                ui.setText(inv.getDescription());
+                            }
                         }
                     }
                 } else {
@@ -396,16 +404,18 @@ public class Story {
 
             //Inserimento "bevi" (vale solo per le pozioni)
             if (par.getCommand().getName().equals("bevi")) {
-                if (par.getObject().getName().equals("pozione")){
-                    int k = -1;
-                    for (int i = 0; i < p.getInventory().size() || k==-1; i++) {
-                        if (p.getInventory().get(i).getName().equals("Pozione")) {
-                            k = i;
+                if (par.getObject() != null) {
+                    if (par.getObject().getName().equals("Pozione")) {
+                        int k = -1;
+                        for (int i = 0; i < p.getInventory().size() || k == -1; i++) {
+                            if (p.getInventory().get(i).getName().equals("Pozione")) {
+                                k = i;
+                            }
                         }
-                    }
-                    if (k>-1){
-                        p.getInventory().get(k).use(p);
-                        p.removeFromInventory(k);
+                        if (k > -1) {
+                            p.getInventory().get(k).use(p);
+                            p.removeFromInventory(k);
+                        }
                     }
                 } else {
                     int pot = 0;
@@ -421,8 +431,6 @@ public class Story {
                         prepareText(ui);
                         ui.setText("Non hai nulla da bere");
                     }
-
-
                     prepareText(ui);
                     ui.setText("Specifica cosa vorresti bere");
                 }
@@ -430,10 +438,12 @@ public class Story {
 
             //Inserimento "leggi" (vale solo per il consiglio della ninfa)
             if (par.getCommand().getName().equals("leggi")) {
-                if (par.getObject().getName().equals("consiglio")){
-                    for (Stobj inv : p.getInventory()) {
-                        if (inv.getName().equals("Consiglio")) {
-                            ui.setText(inv.getDescription());
+                if (par.getObject() != null) {
+                    if (par.getObject().getName().equals("Consiglio")) {
+                        for (Stobj inv : p.getInventory()) {
+                            if (inv.getName().equals("Consiglio")) {
+                                ui.setText(inv.getDescription());
+                            }
                         }
                     }
                 } else {
@@ -455,18 +465,20 @@ public class Story {
 
             //Inserimento "mangia" (vale solo per il frutto)
             if (par.getCommand().getName().equals("mangia")) {
-                if (par.getObject().getName().equals("frutto")){
-                    for (Stobj inv : p.getInventory()) {
-                        if (inv.getName().equals("Frutto")) {
-                            int x = p.getCurrentHp()+20-p.getTotHp();
-                            if (x>0){
-                                p.setCurrentHp(p.getTotHp());
-                            } else {
-                                p.setCurrentHp(p.getCurrentHp()+20);
+                if (par.getObject() != null) {
+                    if (par.getObject().getName().equals("Frutto")) {
+                        for (Stobj inv : p.getInventory()) {
+                            if (inv.getName().equals("Frutto")) {
+                                int x = p.getCurrentHp() + 20 - p.getTotHp();
+                                if (x > 0) {
+                                    p.setCurrentHp(p.getTotHp());
+                                } else {
+                                    p.setCurrentHp(p.getCurrentHp() + 20);
+                                }
                             }
                         }
                     }
-                } else {
+                }else {
                     boolean f = false;
                     for (Stobj inv : p.getInventory()) {
                         if (inv.getName().equals("Frutto")) {

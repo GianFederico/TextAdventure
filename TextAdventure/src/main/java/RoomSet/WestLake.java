@@ -15,7 +15,7 @@ public class WestLake extends Room{
 
    @Override
    public void talkTo(Player p, Stobj person){
-       if (person.getName().equals("ninfa")) {
+       if (person.getName().equals("Ninfa")) {
            if (this.nym) {
                int i = 0;
                int k = 0;
@@ -23,7 +23,7 @@ public class WestLake extends Room{
                adv.setVisible(false);
                adv.setAka(new String[]{"appunto"});
                for (Stobj inv : p.getInventory()) {
-                   if (inv.getName().equals("spada") || inv.getName().equals("coltello")) {
+                   if (inv.getName().equals("Spada") || inv.getName().equals("Coltello")) {
                        k = i;
                    }
                    i++;

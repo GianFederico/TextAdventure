@@ -195,9 +195,9 @@ public class Room  implements Serializable {
         this.setMsg("Non c'è nulla da comprare");
     }
 
-    public void openDoor(){};
+    public void openDoor(UI ui){};
 
-    public void closeDoor(){};
+    public void closeDoor(UI ui){};
 
     public void fightSequence(Player p, UI ui){} //this.setMsg("Non c'è nulla da combattere qui...");
 
