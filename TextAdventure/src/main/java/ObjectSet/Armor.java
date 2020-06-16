@@ -1,6 +1,11 @@
-package ObjectSet;
+/**
+ * Definizione degli oggetti di tipo Armor
+ */
+package objectSet;
 
-public class Armor extends Stobj{
+import base.Stobj;
+
+public class Armor extends Stobj {
     
     private int defense = 0;
     

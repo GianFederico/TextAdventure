@@ -1,8 +1,10 @@
+/**
+ * Definizione base di tutti gli oggetti di gioco
+ */
+package base;
 
-package ObjectSet;
 
-
-import newpackage01.Player;
+import gameCore.Player;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -12,14 +14,10 @@ public class Stobj implements Serializable {
     
     private String name;
     private String description;
-    private Set<String> aka;
+    private Set<String> alias;
     private boolean visible = true;
-    //private boolean openable = false;
     private boolean pickupable = false;
     private boolean usable = false;
-    //private boolean open = false;
-    //private boolean push = false;
-    //private boolean pushable=false;
     
     public Stobj(){}
     
@@ -32,10 +30,10 @@ public class Stobj implements Serializable {
         this.description=description;
     }
     
-    public Stobj(String name, String description, Set<String> aka){
+    public Stobj(String name, String description, Set<String> alias){
         this.name=name;
         this.description=description;
-        this.aka=aka;
+        this.alias=alias;
     }
     
     public String getName() {
@@ -61,14 +59,6 @@ public class Stobj implements Serializable {
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
-    
-    /*public boolean isOpenable() {
-        return openable;
-    }
-
-    public void setOpenable(boolean openable) {
-        this.openable = openable;
-    }*/
 
     public boolean isPickupable() {
         return pickupable;
@@ -86,42 +76,23 @@ public class Stobj implements Serializable {
         this.usable = usable;
     }
 
-    /*public boolean isOpen() {
-        return open;
+    public Set<String> getAlias() {
+        return alias;
     }
 
-    public void setOpen(boolean open) {
-        this.open = open;
-    }*/
-
-    /*public boolean isPush() {
-        return push;
-    }
-
-    public void setPush(boolean push) {
-        this.push = push;
+    public void setAlias(Set<String> alias) {
+        this.alias = alias;
     }
     
-     public boolean isPushable() {
-        return pushable;
+    public void setAlias(String[] sinonimi) {
+        this.alias = new HashSet<>(Arrays.asList(sinonimi));
     }
     
-     public void setPushable(boolean push) {
-        this.pushable = pushable;
-    }*/
-    
-    public Set<String> getAka() {
-        return aka;
-    }
-
-    public void setAka(Set<String> aka) {
-        this.aka = aka;
-    }
-    
-    public void setAka(String[] sinonimi) {
-        this.aka = new HashSet<>(Arrays.asList(sinonimi));
-    }
-    
+    /**
+     * Confronto tra oggetti
+     * @param other
+     * @return boolean e, true se sono uguali, false altrimenti
+     */
     public boolean equals(Object other) {
         boolean e=true;
         if (this == other) {
@@ -136,6 +107,12 @@ public class Stobj implements Serializable {
         return e;
     }
 
-    public void use(Player p){}
-    
+    /**
+     * Utilizzo base dell'oggetto nel gioco.
+     * @param p
+     * @return String come descrizione dell'oggetto usato
+     */
+    public String use(Player p){
+        return this.description;
+    }
 }
