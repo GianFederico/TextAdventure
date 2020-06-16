@@ -1,10 +1,15 @@
-package FileCreation;
+/**
+ * Classe utile alla definizione della mappa di gioco
+ */
+package gameCore;
 
-import RoomSet.*;
-import ObjectSet.Stobj;
-import ObjectSet.Door;
+import objectSet.Potion;
+import roomSet.*;
+import base.Stobj;
+import objectSet.Door;
 import java.io.Serializable;
-import newpackage01.UI;
+import base.Room;
+import monsterSet.*;
 
 
 public class Map implements Serializable{
@@ -13,46 +18,41 @@ public class Map implements Serializable{
     private Room alchemshop = new AlchemShop();
     private Room blksmith = new BlackSmith();
     private Room ngate = new NorthGate();
-    private Room fclearing= new ForestClearing();
-    private Room fcliff= new Room("dirupo foresta","Il vento si fa più forte, e anche più fresco, la vegetazione si "
-                                                    + "dirada e davanti a te scorgi un grosso dirupo che ti offre un panorma"
-                                                    + " mozzafiato ma, non puoi continuare da qui." );
-    private Room tolake = new ToLake();
+    private Room fclearing= new Room();
+    private Room fcliff= new Room();
+    private Room tolake = new Room();
     private Room wlake = new WestLake();
-    private Room forestend = new Room("piedi della montagna", ""); //TODO descrizione
+    private Room mountbase = new Room();
     private Room mountstart = new MountStart();
     private Room fork = new MountFork();
-    private Room wlair=new WyvernLair();
+    private Room wlair=new Room();
     private Room storage=new RoomWDoor();
     private Room shamanroom=new ShamanRoom();
     private Room closet=new ShamSecretRoom();
 
     private Room currentRoom = new Room();
-    private Room previousRoom = new Room();
+    private Room previousRoom = null;
      
+    /**
+     * Costruzione della mappa di gioco
+     */
     public Map(){
         Stobj obj = new Stobj();
-        Stobj door = new Door();
+        Door door = new Door();
         //Creazione delle stanze e assegnazione degli oggetti interagibili
         
         //Casa
         house.setName("Casa");
-        house.setDescription("È mattino, sei vicino a tua madre che, dolorante, "
-                                       + "giace nel letto...non ha chiuso occhio tutta la notte. "
-                                       + "Le dai un infuso di erbe sperando che riesca a dormire.\n" 
-                                       + "Tuo padre è morto anni fa. Solo tu puoi fare qualcosa per salvarla.\n" 
-                                       +"\n" +"Che vuoi fare?");
+        house.setDescription("Sei nella casa dove sei cresciuto. E' molto umile ma è la casa tenuta meglio nell'intero\nvillaggio. C'è silenzio a parte per i lamenti smorzati di tua mamma.");
         house.setNextNorth(square);
-        //house.setUi(ui);
       
         //Piazza centrale
         square.setName("Piazza");
-        square.setDescription("Ti trovi davanti la piazza centrale del villaggio dove sei nato e cresciuto. Quanti ricordi...\\n\"\n" +
-                "                                                          + \"\\n\" +\"Che vuoi fare?");
+        square.setDescription("Ti trovi nella piazza centrale del villaggio dove sei nato e cresciuto. Quanti ricordi...\n");
         door.setName("Porta");
         door.setDescription("E' la porta di casa tua. E' aperta");
-        ((Door)door).setOpen(true);
-        ((Door)door).setDirection("s");
+        door.setOpen(true);
+        door.setDirection("s");
         square.addObject(door);
         square.setNorth(ngate);
         square.setEast(blksmith);
@@ -62,104 +62,105 @@ public class Map implements Serializable{
         
         //Negozio dell'alchimista
         alchemshop.setName("Alchimista");
-        alchemshop.setDescription("Ti ritrovi nel negozio del vecchio alchimista del villaggio. Vende delle pozioni "
-                                                                    + "che potrebbero tornare utili durante la tua avventura.\n" + "Ti accoglie la gentile apprendista"
-                                                                    + "\n" + "Che vuoi fare?");
+        alchemshop.setDescription("Ti ritrovi nel negozio del vecchio alchimista del villaggio.\nVende delle pozioni che potrebbero tornare utili durante la tua avventura.\nTi accoglie la gentile apprendista.");
         alchemshop.setEast(square);
         
         //Fabbro
         blksmith.setName("Fabbro");
-        blksmith.setDescription("Sei nella piccola forgia del villaggio. Hai davanti un omone pelato, peloso e muscoloso "
-                                                            + "che ti chiede come può esserti utile");
+        blksmith.setDescription("Sei nella piccola forgia del villaggio. Hai davanti un omone pelato, peloso e muscoloso\nche ti chiede come può esserti utile.");
+
         blksmith.setWest(square);
         
         //Cancello nord
         ngate.setName("Cancello nord");
-        ngate.setDescription("Ti avvicini al cancello a nord del villaggio. Sai che oltre quel cancello inizia la foresta.\n"
-                                                     + "Per aprirlo hai bisogno di parlare con la guardia");
+        ngate.setDescription("Ti avvicini al cancello a nord del villaggio.\nSai che oltre quel cancello inizia la foresta.\nPer aprirlo hai bisogno di parlare con la guardia.");
+
         ngate.setNextNorth(fclearing);
         ngate.setSouth(square);
 
         //radura nella foresta
-        fclearing.setName("Radura foresta");
-        fclearing.setDescription("La radura si dirama in diverse direzioni davanti a te,\n" 
-                                                           +"dove vuoi andare?");
-        fclearing.setNorth(forestend);
+        fclearing.setName("Radura nella foresta");
+        fclearing.setDescription("La radura si dirama in diverse direzioni davanti a te.");
+        fclearing.setMonster(new Monster_Lupo());
+        fclearing.setNorth(mountbase);
         fclearing.setEast(fcliff);
         fclearing.setSouth(ngate);
         fclearing.setWest(tolake);
 
-        //dirupo est //TODO da rivedere
-        obj = new Stobj();
+        //dirupo est
         obj.setName("Frutto");
-        obj.setDescription("Un frutto selvatico. E' piccolo ma sembra molto nutriente. Può essere mangiato ma sei sicuro di voler mangiare qualcosa raccolta trovata per terra?");
-        obj.setPickupable(false);
+        obj.setDescription("Un frutto selvatico. E' piccolo ma sembra molto nutriente.\nPuò essere mangiato. Sei sicuro di voler mangiare qualcosa raccolta trovata per terra?");
+        obj.setPickupable(true);
         obj.setUsable(true);
+        fcliff.setName("Dirupo nella foresta");
+        fcliff.setDescription("Il vento si fa più forte e più fresco e la vegetazione si dirada." +
+                                "\nDavanti a te scorgi un grosso dirupo che ti offre un panorama mozzafiato" +
+                                "\nma non puoi continuare da qui.");
+        fcliff.setMoney(2);
         fcliff.addObject(obj);
         fcliff.setWest(fclearing);
         
         //sentiero verso il lago
         tolake.setName("Sentiero verso il lago");
-        tolake.setDescription("");
+        tolake.setDescription("Sai che proseguendo in questa direzione raggiungerai il lago.\nVoci dicono che sia la dimora di una ninfa. Potrebbe aiutarti...?");
+        tolake.setMonster(new Monster_Ciclope());
         tolake.setEast(fclearing);
         tolake.setWest(wlake);
         
         //lago ovest
         wlake.setName("Lago nella foresta");
-        wlake.setDescription(""); //TODO descrizione
-        wlake.setWest(tolake);
+        wlake.setDescription("Davanti a te si estende un modesto laghetto che ti infonde serenità.\nL'acqua è limpida e resti sorpreso dagli ammalianti colori della vegetazione.");
+        wlake.setEast(tolake);
         
         //Piedi della montagna (fine foresta)
-        forestend.setNorth(mountstart);
-        forestend.setSouth(fclearing);
+        mountbase.setName("Base della montagna");
+        mountbase.setDescription("Vedi la foresta diradarsi per lasciare spazio ad un enorme montagna.");
+        mountbase.setNorth(mountstart);
+        mountbase.setSouth(fclearing);
         
         //davanti alla porta segreta sulla montagna
-        mountstart.setName("Base della montagna");
-        mountstart.setDescription("Sei su un'area poco più grande che ti ricorda un pianerottolo di qualche casa, "
-                                   + "ma oltre al vento e la viva roccia, ad una prima occhiata, non noti nulla di particolare.\nChe vuoi fare?");
+        mountstart.setName("Sentiero sul fianco della montagna");
+        mountstart.setDescription("Proseguendo, ti ritrovi su un'area rocciosa poco più grande di un pianerottolo di una casa."
+                                   + "\nIl sentiero è bloccato da una frana e davanti a te vedi due strane leve sospette.");
         mountstart.setNextNorth(fork);
-        mountstart.setSouth(forestend);
+        mountstart.setSouth(mountbase);
         
         //bivio all'interno della montagna
-        fork.setName("Bivio");
-        fork.setDescription("La strada si dirama verso Est ed Ovest.\nDove vuoi andare?");
+        fork.setName("Entrata nella montagna");
+        fork.setDescription("Sei all'entrata di una strana caverna nella montagna.\nCapisci che è stata abitata ma adesso sembra abbandonata. La strada prosegue verso est.\nAd ovest c'è solo un muro...");
         fork.setNextWest(wlair);
         fork.setNextEast(storage);
         fork.setSouth(mountstart);
         
         //tana della viverna
         wlair.setName("Tana della viverna");
-        wlair.setDescription("Sei nella tana della viverna che giace immobile a terra, non hai mai visto una viverna vera, "
-                                                    + "ma dalle illustrazioni che hai visto nella tua vita, sai che non hanno gemme sul corpo");
+        wlair.setDescription("Sei nella tana dove la viverna era in letargo. Una caverna spaziosa e ben riscaldata!");
+        wlair.setMonster(new Monster_Viverna());
         wlair.setEast(fork);
         
         //magazzino est dopo il bivio
         storage.setName("Magazzino");
-        storage.setDescription("La stanza in cui sei ha un'altra porta sulla parete nord, oltre a quella da cui sei entrato.\\n\" +\n" +
-                "                                                    \"Cosa vuoi fare?");
-        obj = new Stobj();
-        obj.setName("Pozione");
-        obj.setAka(new String[]{"pozione di cura","pozione"});
-        obj.setDescription("pozione curativa");
-        obj.setPickupable(true);
-        storage.addObject(obj);
-        /*obj.setName("Pozione curativa");
-        obj.setAka(new String[]{"pozione di cura","pozione"});
-        obj.setDescription("pozione curativa");
-        obj.setPickupable(true);*/
-        storage.addObject(obj); 
-        storage.setMoney(30);
+        storage.setDescription("Sei in una stanza che sembra essere dove lo sciamano conserva le sue cianfrusaglie.");
+        Stobj potion = new Potion();
+        potion.setName("Pozione");
+        potion.setAlias(new String[]{"cura"});
+        potion.setDescription("Pozione curativa. Apparteneva allo sciamano. Sei un ladro...");
+        potion.setPickupable(true);
+        potion.setUsable(true);
+        storage.addObject(potion);
+        storage.addObject(potion);
+        storage.setMoney(21);
         door = new Door();
         door.setName("Porta");
         door.setDescription("Una semplice porta di legno. E' chiusa");
-        ((Door)door).setOpen(false);
-        ((Door)door).setDirection("n");
+        door.setOpen(false);
+        door.setDirection("n");
         storage.addObject(door);
         door = new Door();
-        //door.setName("Porta");
+        door.setName("Porta");
         door.setDescription("Una semplice porta di legno. E' aperta");
-        ((Door)door).setOpen(true);
-        ((Door)door).setDirection("w");
+        door.setOpen(true);
+        door.setDirection("w");
         storage.addObject(door);
         storage.setNextNorth(shamanroom);
         storage.setWest(fork);
@@ -167,20 +168,23 @@ public class Map implements Serializable{
         
         //stanza sciamano
         shamanroom.setName("Stanza dello Sciamano");
-        shamanroom.setDescription("Sulla  parete Ovest, c'è un'immensa libreria, piena di libri e di appunti. \\n\" +\n" +
-                                    "\"La parete Nord è sgombra, ma noti un piccolo incavo al centro di essa.\\n\" +\n" +
-                                    "\"La parete Est invece è occupata da un'enorme scrivania alla quale, una figura siede incappucciata, di spalle.\"\n" +
-                                    "+ \"che vuoi fare?");
+        shamanroom.setDescription("Sei nella stanza in cui viveva lo sciamano in completo isolamento.\nSulla  parete sinistra, c'è un'immensa libreria, piena di libri e di appunti.\n" +
+                                    "La parete davanti a te è sgombra, ma noti un piccolo incavo al centro di essa.\n" +
+                                    "La parete destra invece è occupata da un'enorme scrivania alla quale è seduta\nuna figura incappucciata che ti porge le spalle.");
         shamanroom.setNextNorth(closet);
         shamanroom.setSouth(storage);
         shamanroom.setNextSouth(storage);
         
         //stanzino nascosto dello sciamano
         closet.setName("Stanzino nascosto");
-        closet.setDescription("All'interno ci sono almeno una quindicina di mensole che partono dal basso, con ogni tipo di pozione meticolosamente conservate, "
-                                                    + "che vanno da quelle d'amore a quelle velenose, ma i tuoi occhi si posano su una in particolare...");
+        closet.setDescription("Sei nello stanzino segreto dello sciamano.\nChissà quali cose losche avvenivano qui dentro...\n" +
+                                "All'interno ci sono almeno una quindicina di mensole che partono dal basso,\ncon ogni tipo di pozione meticolosamente conservate.\n"
+                                + "Leggi etichette che vanno da \"amore\" a \"veleno\",\nma il tuo interesse cade su una in particolare:\n" +
+                                "\"Pozione millecure\", è proprio quel che cercavi!");
         closet.setSouth(shamanroom);
         closet.setNextNorth(house);
+
+        this.setCurrentRoom(house);
     }
 
     public void setCurrentRoom(Room r){
@@ -199,6 +203,10 @@ public class Map implements Serializable{
         return this.previousRoom;
     }
     
+    /**
+     * Riempimento della mappa a partire da una mappa esistente
+     * @param m 
+     */
     public void setMap(Map m){
        this.setHouse(m.getHouse());
        this.setSquare(m.getSquare());
@@ -209,7 +217,7 @@ public class Map implements Serializable{
        this.setFcliff(m.getFcliff());
        this.setTolake(m.getTolake());
        this.setWlake(m.getWlake());
-       this.setForestend(m.getForestend());
+       this.setMountbase(m.getMountbase());
        this.setMountstart(m.getMountstart());
        this.setFork(m.getFork());
        this.setWlair(m.getWlair());
@@ -218,7 +226,6 @@ public class Map implements Serializable{
        this.setCloset(m.getCloset());
        this.setCurrentRoom(m.getCurrentRoom());
        this.setPreviousRoom(m.getPreviousRoom());
-      
     }
 
     public Room getHouse() {
@@ -293,12 +300,12 @@ public class Map implements Serializable{
         this.wlake = wlake;
     }
 
-    public Room getForestend() {
-        return forestend;
+    public Room getMountbase() {
+        return mountbase;
     }
 
-    public void setForestend(Room forestend) {
-        this.forestend = forestend;
+    public void setMountbase(Room forestend) {
+        this.mountbase = forestend;
     }
 
     public Room getMountstart() {
@@ -348,6 +355,14 @@ public class Map implements Serializable{
     public void setCloset(Room closet) {
         this.closet = closet;
     }
-    
+
+    /**
+     * Spostamento alla stanza precedente
+     */
+    public void back(){
+        Room tmp = this.getCurrentRoom();
+        this.setCurrentRoom(this.getPreviousRoom());
+        this.setPreviousRoom(tmp);
+    }
     
 }

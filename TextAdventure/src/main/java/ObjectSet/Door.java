@@ -1,7 +1,11 @@
+/**
+ * Definizione degli oggetti di tipo Door
+ */
+package objectSet;
 
-package ObjectSet;
+import base.Stobj;
 
-public class Door extends Stobj{
+public class Door extends Stobj {
     
     private String direction;
     private boolean open;

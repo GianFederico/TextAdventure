@@ -1,6 +1,11 @@
-package ObjectSet;
+/**
+ *  Definizione degli oggetti di tipo Weapon
+ */
+package objectSet;
 
-public class Weapon extends Stobj{
+import base.Stobj;
+
+public class Weapon extends Stobj {
     
     private int damage = 0;
     
