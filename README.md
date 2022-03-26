@@ -1,3 +1,3 @@
 # TextAdventure
-Avventura testuale progetto MAP giugno2020.
-Un'avventura testuale old school ispirata ad una quest di Dungeons&Dragons.
+Advanced proramming methods project June 2020.
+An old-school themed text adventure inspired by a Dungeons & Dragons quest.
